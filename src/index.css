@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    overflow-y: scroll;
+}
+
+input[type="text"], input[type="password"], input[type="email"], textarea, input[type="number"], input[type="tel"], input[type="search"]{
+    @apply w-full border my-1 py-2 px-3 rounded-2xl;
+}

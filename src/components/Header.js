@@ -1,0 +1,79 @@
+import React, { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
+
+function Header() {
+    const { userInfo, setUserInfo } = useContext(UserContext);
+
+    // const [redirect, setRedirect]=useState(false);
+
+    // const handleClick=async()=>{
+    //     const response=await fetch("http://localhost:5000/logout", {
+    //         method: 'GET',
+    //         credentials: 'include'
+    //     });
+
+    //     const res=await response.json();
+
+    //     alert(res.success);
+    //     setUserInfo(null);
+    //     setRedirect(true);
+    // }
+
+    // if(redirect){
+    //     <Navigate to={"/"}/>
+    // }
+
+    return (
+        <header>
+            <div className="flex justify-between p-6 bg-amber-500">
+                <Link to={"/"}>
+                    <img src="../assets/LOGO_LNM.png" alt="LNMITT_logo" width={120} height={30} />
+                </Link>
+
+                <div className="flex justify-between items-center gap-4">
+                    <Link to={"/hostels"} className="bg-white p-2 rounded-md">
+                        <i className="fa-solid fa-hotel"></i> Hostels
+                    </Link>
+
+                    <Link to={"/contact"} className="bg-white p-2 rounded-md">
+                        <i className="fa-solid fa-address-book"></i> Contact Us
+                    </Link>
+
+                    {userInfo ? (
+                        <Link to={`/${userInfo.role}/account`} className="bg-white p-2 rounded-md">
+                            <i class="fa-solid fa-user"></i> {userInfo.name}
+                        </Link>
+                    ) : (
+                        <div className="dropdown">
+                            <button className="btn bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i className="fa-solid fa-right-to-bracket"></i> Login
+                            </button>
+                            <ul className="dropdown-menu text-center p-2">
+                                <li>
+                                    <Link to={"/login/student"}>continue as Student</Link>
+                                </li>
+                                <li>
+                                    <hr className="dropdown-divider" />
+                                </li>
+                                <li>
+                                    <Link to={"/login/hostelStaff"} className="whitespace-nowrap w-4 overflow-hidden text-ellipsis">
+                                        continue as Hostel Staff
+                                    </Link>
+                                </li>
+                                <li>
+                                    <hr className="dropdown-divider" />
+                                </li>
+                                <li>
+                                    <Link to={"/login/admin"}>continue as Admin</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </header>
+    );
+}
+
+export default Header;
