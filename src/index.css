@@ -4,8 +4,10 @@
 
 html{
     overflow-y: scroll;
+    position: relative;
+    min-height: 100%
 }
 
-input[type="text"], input[type="password"], input[type="email"], textarea, input[type="number"], input[type="tel"], input[type="search"]{
+input[type="text"], input[type="password"], input[type="email"]{
     @apply w-full border my-1 py-2 px-3 rounded-2xl;
 }

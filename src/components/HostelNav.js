@@ -16,7 +16,7 @@ function HostelNav(){
 
     return(
         <div>
-            <div className="flex justify-center m-4">
+            <nav className="flex justify-center m-4">
                 <Link to={"/hostels/bh1"} className={handleClasses("bh1")}>
                     BH-1
                 </Link>
@@ -28,7 +28,7 @@ function HostelNav(){
                 <Link to={"/hostels/bh3"} className={handleClasses("bh3")}>
                     BH-3
                 </Link>
-            </div>
+            </nav>
         </div>
     );
 }

@@ -44,6 +44,7 @@ function Login() {
     if(response.ok){
       alert(res.success);
       setUser({username: "", password: ""});
+      res.user.role=id;  //otherwise we need to reload the page to get role info
       setUserInfo(res.user);
       setRedirect(true);
     }
@@ -67,7 +68,7 @@ function Login() {
           </form>
           <div className="text-center py-2">
             Don't have an account yet?   
-            {id==='Admin'?<span> <Link to={"/register/admin"} className='underline text-blue-600'>Register</Link></span>:<span> <Link to={"/contact"} className='underline text-blue-600'>Contact Administration</Link></span>}
+            {id==='admin'?<span> <Link to={"/register/admin"} className='underline text-blue-600'>Register</Link></span>:<span> <Link to={"/contact"} className='underline text-blue-600'>Contact Administration</Link></span>}
           </div>
       </div>
     </div>

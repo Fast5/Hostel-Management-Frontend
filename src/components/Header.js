@@ -1,28 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
 function Header() {
-    const { userInfo, setUserInfo } = useContext(UserContext);
-
-    // const [redirect, setRedirect]=useState(false);
-
-    // const handleClick=async()=>{
-    //     const response=await fetch("http://localhost:5000/logout", {
-    //         method: 'GET',
-    //         credentials: 'include'
-    //     });
-
-    //     const res=await response.json();
-
-    //     alert(res.success);
-    //     setUserInfo(null);
-    //     setRedirect(true);
-    // }
-
-    // if(redirect){
-    //     <Navigate to={"/"}/>
-    // }
+    const { userInfo } = useContext(UserContext);
 
     return (
         <header>
@@ -42,7 +23,7 @@ function Header() {
 
                     {userInfo ? (
                         <Link to={`/${userInfo.role}/account`} className="bg-white p-2 rounded-md">
-                            <i class="fa-solid fa-user"></i> {userInfo.name}
+                            <i className="fa-solid fa-user"></i> {userInfo.name}
                         </Link>
                     ) : (
                         <div className="dropdown">
