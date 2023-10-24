@@ -8,17 +8,19 @@ const RoomsState=(props)=>{
     const [ready, setReady]=useState(false);
 
     useEffect(()=>{
-        fetch("http://localhost:5000/api/admin/allRooms", {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then((response)=>{
-            return response.json();
-        })
-        .then((data)=>{
-            setReady(true);
-            return setRooms(data);
-        });
+        if(!rooms.length){
+            fetch("http://localhost:5000/api/admin/allRooms", {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                setReady(true);
+                return setRooms(data);
+            });
+        }
     }, []);
 
     return(

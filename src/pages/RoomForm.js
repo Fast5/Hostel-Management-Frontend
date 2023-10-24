@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import RoomsContext from "../contexts/RoomsContext";
 import Loader from "../components/Loader";
 
-function Room(){
+function RoomForm(){
     const {id}=useParams();  //for editing (only accomodationtype) particular room
 
     const [roomInfo, setRoomInfo]=useState({roomNo: "", hostel: "", accomodationType: ""});  
@@ -11,25 +11,23 @@ function Room(){
     const [redirect, setRedirect]=useState(false);
 
     const {rooms, setRooms, ready}=useContext(RoomsContext);   //reload required (solved by setRooms method)
-
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
-    }
-
+    
     useEffect(()=>{
         if(id==='new'){
             return;
         }
 
-        const editRoom=rooms.filter((room)=>{return room._id===id});
-        return setRoomInfo(editRoom[0]);
-    }, [id]);
+        if(ready){
+            const editRoom=rooms.filter((room)=>{return room._id===id});
+            return setRoomInfo(editRoom[0]);
+        }
 
-    if(!rooms.length && !redirect){
-        return <Loader />;
+    }, [ready]);
+
+    if(!ready){
+        return <Loader />
     }
-    
+
     let bh1Rooms=0, bh2Rooms=0, bh3Rooms=0;
     for(let i=0; i<rooms.length; i++){
         if(rooms[i].hostel==='bh1'){
@@ -114,7 +112,7 @@ function Room(){
     }
 
     return(
-        <div className="flex flex-col items-center m-12 pb-4">
+        <div className="flex flex-col items-center m-12 pb-4"> 
             <form onSubmit={handleSubmit} className="flex flex-col justify-center mb-4">
                 <div className="border-2 border-amber-500 rounded-2xl my-4">
                     <div className="flex w-[36rem]">
@@ -187,4 +185,4 @@ function Room(){
     );
 }
 
-export default Room;
+export default RoomForm;

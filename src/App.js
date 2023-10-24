@@ -13,8 +13,11 @@ import Account from './pages/Account';
 import AddRoom from './pages/AddRoom';
 import AddStudent from './pages/AddStudent';
 import AddHostelStaff from './pages/AddHostelStaff';
-import Room from './pages/Room';
+import RoomForm from './pages/RoomForm';
 import RoomsState from './contexts/RoomsState';
+import StudentForm from './pages/StudentForm';
+import StudentsState from './contexts/StudentsState';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   return (
@@ -23,21 +26,25 @@ function App() {
         <BrowserRouter>
           <UserState>
             <RoomsState>
-              <Header />
-              <Routes className="flex grow-1">
-                <Route path='/' element={<Home />} />
-                <Route path='/hostels' element={<Hostels />} />
-                <Route path='/hostels/:id' element={<HostelPage />} />
-                <Route path='/login/:id' element={<Login />}/>
-                <Route path='/register/:id' element={<Register />}/>
-                <Route path='/:id/account' element={<Account />}/>
-                <Route path='/admin/addRoom' element={<AddRoom />}/>
-                <Route path='/admin/addRoom/:id' element={<Room />}/>
-                <Route path='/admin/addStudent' element={<AddStudent />}/>
-                <Route path='/admin/addHostelStaff' element={<AddHostelStaff />}/>
-                <Route path='/contact' element={<ContactUs />} />
-              </Routes>
-              <Footer />
+              <StudentsState>
+                  <Header />
+                  <Routes className="flex grow-1">
+                    <Route path='/' element={<Home />} />
+                    <Route path='/hostels' element={<Hostels />} />
+                    <Route path='/hostels/:id' element={<HostelPage />} />
+                    <Route path='/login/:id' element={<Login />}/>
+                    <Route path='/register/:id' element={<Register />}/>
+                    <Route path='/:id/account' element={<Account />}/>
+                    <Route path='/admin/addRoom' element={<AddRoom />}/>
+                    <Route path='/admin/addRoom/:id' element={<RoomForm />}/>
+                    <Route path='/admin/addStudent' element={<AddStudent />}/>
+                    <Route path='/admin/addStudent/:id' element={<StudentForm />}/>
+                    <Route path='/admin/addHostelStaff' element={<AddHostelStaff />}/>
+                    <Route path='/contact' element={<ContactUs />} />
+                    <Route path='*' element={<PageNotFound />} />
+                  </Routes>
+                  <Footer />
+              </StudentsState>
             </RoomsState>
           </UserState>
         </BrowserRouter>

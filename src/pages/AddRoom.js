@@ -9,15 +9,6 @@ function AddRoom(){
     
     const {rooms, setRooms, ready}=useContext(RoomsContext); 
 
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
-    }
-
-    if(!rooms.length){
-        return <Loader />
-    }
-
     //delete last room
     const handleClick=async(hostel)=>{
         let roomIndex;
@@ -61,14 +52,16 @@ function AddRoom(){
                 <i className="fa-solid fa-plus"></i> Add Room
             </Link>
 
+            {!ready && <Loader />}
+
             <div className="row m-4">
                 <div className="col">
                     <h1 className="text-lg mb-2">BH-1</h1>
                     <div className="m-2">
                         {bh1Rooms.length>0 ?  bh1Rooms.map((room, index)=>{
                             return(
-                                <Link to={`/admin/addRoom/${room._id}`}>
-                                    <div key={index} className="bg-gray-100 p-2 rounded-2xl mb-4">
+                                <Link key={index} to={`/admin/addRoom/${room._id}`}>
+                                    <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Room No.: </label>
                                             <h1>{room.roomNo}</h1>
@@ -95,8 +88,8 @@ function AddRoom(){
                     <div className="m-2">
                         {bh2Rooms.length>0 ?  bh2Rooms.map((room, index)=>{
                             return(
-                                <Link to={`/admin/addRoom/${room._id}`}>
-                                    <div key={index} className="bg-gray-100 p-2 rounded-2xl mb-4">
+                                <Link key={index} to={`/admin/addRoom/${room._id}`}>
+                                    <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Room No.: </label>
                                             <h1>{room.roomNo}</h1>
@@ -123,8 +116,8 @@ function AddRoom(){
                     <div className="m-2">
                         {bh3Rooms.length>0 ?  bh3Rooms.map((room, index)=>{
                             return(
-                                <Link to={`/admin/addRoom/${room._id}`}>
-                                    <div key={index} className="bg-gray-100 p-2 rounded-2xl mb-4">
+                                <Link key={index} to={`/admin/addRoom/${room._id}`}>
+                                    <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Room No.: </label>
                                             <h1>{room.roomNo}</h1>
