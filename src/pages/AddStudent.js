@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AccountNav from "../components/AccountNav";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -6,7 +6,24 @@ import StudentsContext from "../contexts/StudentsContext";
 
 function AddStudent(){
 
-    const {students, ready}=useContext(StudentsContext);
+    const {students, setStudents, ready, setReady}=useContext(StudentsContext);
+
+    //Must be used here as it is shown without pressing a button (unlike login)
+    useEffect(()=>{
+        if(!students.length){
+            fetch("http://localhost:5000/api/admin/allStudents", {
+                method: 'GET',
+                credentials: 'include'  
+            })
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                setReady(true);
+                return setStudents(data);
+            });
+        }
+    }, []);
 
     return(
         <div className="text-center">

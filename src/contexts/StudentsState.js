@@ -6,7 +6,7 @@ const StudentsState=(props)=>{
 
     const [ready, setReady]=useState(false);
 
-    useEffect(()=>{
+    useEffect(()=>{  //requrired when reloading 
         if(!students.length){
             fetch("http://localhost:5000/api/admin/allStudents", {
                 method: 'GET',
@@ -23,7 +23,7 @@ const StudentsState=(props)=>{
     }, []);
 
     return(
-        <StudentsContext.Provider value={{students, setStudents, ready}}>
+        <StudentsContext.Provider value={{students, setStudents, ready, setReady}}>
             {props.children}
         </StudentsContext.Provider>
     );

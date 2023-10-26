@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AccountNav from "../components/AccountNav";
 import { Link } from "react-router-dom";
 import RoomsContext from "../contexts/RoomsContext";
@@ -7,7 +7,24 @@ import Loader from "../components/Loader";
 function AddRoom(){
     //make sure to check if the user is admin or not using userContext->role==='admin'=>then only allow (left)
     
-    const {rooms, setRooms, ready}=useContext(RoomsContext); 
+    const {rooms, setRooms, ready, setReady}=useContext(RoomsContext); 
+
+    //Must be used here as it is shown without pressing a button (unlike login)
+    useEffect(()=>{
+        if(!rooms.length){
+            fetch("http://localhost:5000/api/admin/allRooms", {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                setReady(true);
+                return setRooms(data);
+            })
+        }
+    }, []);
 
     //delete last room
     const handleClick=async(hostel)=>{
@@ -39,7 +56,7 @@ function AddRoom(){
             alert(res.error);
         }
     }
-
+    
     let bh1Rooms=rooms.filter((room)=>{return room.hostel==='bh1'});
     let bh2Rooms=rooms.filter((room)=>{return room.hostel==='bh2'});
     let bh3Rooms=rooms.filter((room)=>{return room.hostel==='bh3'});
@@ -52,7 +69,7 @@ function AddRoom(){
                 <i className="fa-solid fa-plus"></i> Add Room
             </Link>
 
-            {!ready && <Loader />}
+            {!ready && !rooms.length && <Loader />}
 
             <div className="row m-4">
                 <div className="col">

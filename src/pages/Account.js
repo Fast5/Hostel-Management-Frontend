@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 function Account(){
     const {id}=useParams();
 
-    const {userInfo, setUserInfo, ready}=useContext(UserContext);
+    let {userInfo, setUserInfo, ready}=useContext(UserContext);
 
     const [redirect, setRedirect]=useState(false);
 
@@ -56,6 +56,7 @@ function Account(){
                 <AccountNav role={id} />
     
                 {/* student details */}
+                
             </div>
         );       
     }

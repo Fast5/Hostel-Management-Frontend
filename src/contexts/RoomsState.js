@@ -7,7 +7,7 @@ const RoomsState=(props)=>{
 
     const [ready, setReady]=useState(false);
 
-    useEffect(()=>{
+    useEffect(()=>{   //requrired when reloading 
         if(!rooms.length){
             fetch("http://localhost:5000/api/admin/allRooms", {
                 method: 'GET',
@@ -24,7 +24,7 @@ const RoomsState=(props)=>{
     }, []);
 
     return(
-        <RoomsContext.Provider value={{rooms, setRooms, ready}}>
+        <RoomsContext.Provider value={{rooms, setRooms, ready, setReady}}>
             {props.children}
         </RoomsContext.Provider>
     );

@@ -57,6 +57,9 @@ function Login() {
     return <Navigate to={`/${id}/account`}/>
   }
 
+    // pattern="[A-Za-z]" must be added to name
+
+
   return (
     <div className="mt-20 flex items-center justify-around">
       <div className="mb-24">

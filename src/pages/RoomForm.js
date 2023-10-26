@@ -12,6 +12,12 @@ function RoomForm(){
 
     const {rooms, setRooms, ready}=useContext(RoomsContext);   //reload required (solved by setRooms method)
     
+    // if(!ready){
+    //     setTimeout(()=>{}, 1000);
+    // }
+
+    // console.log(ready);
+    
     useEffect(()=>{
         if(id==='new'){
             return;
@@ -19,12 +25,12 @@ function RoomForm(){
 
         if(ready){
             const editRoom=rooms.filter((room)=>{return room._id===id});
-            return setRoomInfo(editRoom[0]);
+            setRoomInfo(editRoom[0]);
         }
 
     }, [ready]);
 
-    if(!ready){
+    if(!ready){  //has to be checked
         return <Loader />
     }
 
