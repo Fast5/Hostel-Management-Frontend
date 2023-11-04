@@ -11,19 +11,17 @@ function AddRoom(){
 
     //Must be used here as it is shown without pressing a button (unlike login)
     useEffect(()=>{
-        if(!rooms.length){
-            fetch("http://localhost:5000/api/admin/allRooms", {
-                method: 'GET',
-                credentials: 'include'
-            })
-            .then((response)=>{
-                return response.json();
-            })
-            .then((data)=>{
-                setReady(true);
-                return setRooms(data);
-            })
-        }
+        fetch("http://localhost:5000/api/admin/allRooms", {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then((response)=>{
+            return response.json();
+        })
+        .then((data)=>{
+            setReady(true);
+            return setRooms(data);
+        });
     }, []);
 
     //delete last room
@@ -69,7 +67,7 @@ function AddRoom(){
                 <i className="fa-solid fa-plus"></i> Add Room
             </Link>
 
-            {!ready && !rooms.length && <Loader />}
+            {!ready && <Loader />}
 
             <div className="row m-4">
                 <div className="col">

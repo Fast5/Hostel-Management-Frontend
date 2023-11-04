@@ -12,17 +12,11 @@ function RoomForm(){
 
     const {rooms, setRooms, ready}=useContext(RoomsContext);   //reload required (solved by setRooms method)
     
-    // if(!ready){
-    //     setTimeout(()=>{}, 1000);
-    // }
-
-    // console.log(ready);
-    
     useEffect(()=>{
         if(id==='new'){
             return;
         }
-
+        
         if(ready){
             const editRoom=rooms.filter((room)=>{return room._id===id});
             setRoomInfo(editRoom[0]);
@@ -31,7 +25,7 @@ function RoomForm(){
     }, [ready]);
 
     if(!ready){  //has to be checked
-        return <Loader />
+        return <Navigate to={"/admin/addRoom"}/>
     }
 
     let bh1Rooms=0, bh2Rooms=0, bh3Rooms=0;

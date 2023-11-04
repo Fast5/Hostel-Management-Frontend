@@ -25,8 +25,8 @@ function StudentForm(){
 
     }, [ready]);
 
-    if(!ready){
-        return <Loader />
+    if(!ready && id!=='new'){
+        return <Navigate to={"/admin/addStudent"}/>;
     }
 
     const handleChange=(event)=>{
@@ -54,11 +54,10 @@ function StudentForm(){
                 setRedirect(true);
             }
             else{
-                setStudentInfo({name: "", rollNo: "", phoneNo: "", guardianName: "", guardianPhoneNo: "", username: "", password: ""})
                 alert(res.error);
             }
         }
-        else{  //for edit & delete
+        else{  //for edit
             const response=await fetch("http://localhost:5000/api/admin/editStudent", {
                 method: 'PUT',
                 credentials: 'include',
@@ -79,7 +78,6 @@ function StudentForm(){
                 alert(res.error);
             }
         }
-
     }
     
     //for deleting 

@@ -11,10 +11,10 @@ function Account(){
 
     const [redirect, setRedirect]=useState(false);
 
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
-    }
+    // if(!ready){
+    //     setTimeout(()=>{
+    //     }, 1000);
+    // }
 
     if(!userInfo && !redirect){
         return <Loader />;

@@ -18,6 +18,8 @@ import RoomsState from './contexts/RoomsState';
 import StudentForm from './pages/StudentForm';
 import StudentsState from './contexts/StudentsState';
 import PageNotFound from './components/PageNotFound';
+import HostelStaffForm from './pages/HostelStaffForm';
+import HostelStaffsState from './contexts/HostelStaffsState';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <UserState>
             <RoomsState>
               <StudentsState>
+                <HostelStaffsState>
                   <Header />
                   <Routes className="flex grow-1">
                     <Route path='/' element={<Home />} />
@@ -40,10 +43,12 @@ function App() {
                     <Route path='/admin/addStudent' element={<AddStudent />}/>
                     <Route path='/admin/addStudent/:id' element={<StudentForm />}/>
                     <Route path='/admin/addHostelStaff' element={<AddHostelStaff />}/>
+                    <Route path='/admin/addHostelStaff/:id' element={<HostelStaffForm />}/>
                     <Route path='/contact' element={<ContactUs />} />
                     <Route path='*' element={<PageNotFound />} />
                   </Routes>
                   <Footer />
+                </HostelStaffsState>
               </StudentsState>
             </RoomsState>
           </UserState>

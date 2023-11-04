@@ -58,7 +58,6 @@ function AddStudent(){
                     );
                 }) : "No students added"}
             </div>
-
         </div>
     );
 }
