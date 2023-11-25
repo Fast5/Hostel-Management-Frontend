@@ -14,27 +14,71 @@ function AccountNav(props){
         return classes;
     }
     
-    return(
-        <div className="mb-10">
-            <nav className="flex justify-center m-4">
-                <Link to={`/${props.role}/account`} className={handleClasses("account")}>
-                    My Profile
-                </Link>
-                <div className="border-l border-gray-300"></div>
-                <Link to={"/admin/addRoom"} className={handleClasses("addRoom")}>
-                    Add Room
-                </Link>
-                <div className="border-l border-gray-300"></div>
-                <Link to={"/admin/addStudent"} className={handleClasses("addStudent")}>
-                    Add Student
-                </Link>
-                <div className="border-l border-gray-300"></div>
-                <Link to={"/admin/addHostelStaff"} className={handleClasses("addHostelStaff")}>
-                    Add Hostel Employee
-                </Link>
-            </nav>
-        </div>
-    );
+    if(props.role==='admin'){
+        return(
+            <div className="mb-10">
+                <nav className="flex justify-center m-4">
+                    <Link to={`/${props.role}/account`} className={handleClasses("account")}>
+                        My Profile
+                    </Link>
+                    <div className="border-l border-gray-300"></div>
+                    <Link to={`/${props.role}/addRoom`} className={handleClasses("addRoom")}>
+                        Add Room
+                    </Link>
+                    <div className="border-l border-gray-300"></div>
+                    <Link to={`/${props.role}/addStudent`} className={handleClasses("addStudent")}>
+                        Add Student
+                    </Link>
+                    <div className="border-l border-gray-300"></div>
+                    <Link to={`/${props.role}/addHostelStaff`} className={handleClasses("addHostelStaff")}>
+                        Add Hostel Employee
+                    </Link>
+                </nav>
+            </div>
+        );
+    }
+    else if(props.role==='student'){
+        return(
+            <div className="mb-10">
+                <nav className="flex justify-center m-4">
+                    <Link to={`/${props.role}/account`} className={handleClasses("account")}>
+                        My Profile
+                    </Link>
+                    <div className="border-l border-gray-300"></div>
+                    <Link to={"/student/addComplaint"} className={handleClasses("addComplaint")}>
+                        Add Complaint
+                    </Link>
+                    {/* <div className="border-l border-gray-300"></div> */}
+                    {/* <Link to={"/student/nightExtension"} className={handleClasses("addRoom")}>
+                        Night Extension
+                    </Link> */}
+                </nav>
+            </div>
+        );
+    }
+    else if(props.role==='hostelStaff'){
+        return(
+            <div className="mb-10">
+                <nav className="flex justify-center m-4">
+                    <Link to={`/${props.role}/account`} className={handleClasses("account")}>
+                        My Profile
+                    </Link>
+                    <div className="border-l border-gray-300"></div>
+                    <Link to={`/${props.role}/allocateRoom`} className={handleClasses("allocateRoom")}>
+                        Allocate Room
+                    </Link>
+                    <div className="border-l border-gray-300"></div>
+                    <Link to={`/${props.role}/viewComplaints`} className={handleClasses("viewComplaint")}>
+                        View Complaints
+                    </Link>
+                </nav>
+            </div>
+        );
+    }
+    else{
+            //page not found
+    }
+
 }
 
 export default AccountNav;

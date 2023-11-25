@@ -20,6 +20,11 @@ import StudentsState from './contexts/StudentsState';
 import PageNotFound from './components/PageNotFound';
 import HostelStaffForm from './pages/HostelStaffForm';
 import HostelStaffsState from './contexts/HostelStaffsState';
+import AddComplaint from './pages/AddComplaint';
+import AllocateRoom from './pages/AllocateRoom';
+import Complaints from './pages/Complaints';
+import AllocateRoomForm from './pages/AllocateRoomForm';
+import ComplaintForm from './pages/ComplaintForm';
 
 function App() {
   return (
@@ -44,6 +49,11 @@ function App() {
                     <Route path='/admin/addStudent/:id' element={<StudentForm />}/>
                     <Route path='/admin/addHostelStaff' element={<AddHostelStaff />}/>
                     <Route path='/admin/addHostelStaff/:id' element={<HostelStaffForm />}/>
+                    <Route path='/student/addComplaint' element={<AddComplaint />}/>
+                    <Route path='/student/addComplaint/:id' element={<ComplaintForm />}/>
+                    <Route path='/hostelStaff/allocateRoom' element={<AllocateRoom />}/>
+                    <Route path='/hostelStaff/allocateRoom/:id' element={<AllocateRoomForm />}/>
+                    <Route path='/hostelStaff/viewComplaints' element={<Complaints />}/>
                     <Route path='/contact' element={<ContactUs />} />
                     <Route path='*' element={<PageNotFound />} />
                   </Routes>

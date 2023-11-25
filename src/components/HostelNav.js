@@ -5,10 +5,10 @@ function HostelNav(){
     const location=useLocation();
 
     const handleClasses=(type=null)=>{
-        let classes="bg-slate-50 text-center p-2 w-36 h-10";
+        let classes="bg-white text-center p-2 w-36 h-10";
         
         if(("/hostels/"+type===location.pathname)){
-            classes="bg-slate-300 text-center p-2 w-36 h-10";
+            classes="bg-red-500 text-white text-center p-2 w-36 h-10";
         }
 
         return classes;

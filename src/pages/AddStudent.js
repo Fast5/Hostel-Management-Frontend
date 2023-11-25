@@ -8,22 +8,27 @@ function AddStudent(){
 
     const {students, setStudents, ready, setReady}=useContext(StudentsContext);
 
-    //Must be used here as it is shown without pressing a button (unlike login)
-    useEffect(()=>{
-        if(!students.length){
-            fetch("http://localhost:5000/api/admin/allStudents", {
-                method: 'GET',
-                credentials: 'include'  
-            })
-            .then((response)=>{
-                return response.json();
-            })
-            .then((data)=>{
-                setReady(true);
-                return setStudents(data);
-            });
-        }
-    }, []);
+    // Must be used here as it is shown without pressing a button (unlike login)
+    // useEffect(()=>{
+    //     if(!students.length){
+    //         fetch("http://localhost:5000/api/admin/allStudents", {
+    //             method: 'GET',
+    //             credentials: 'include'  
+    //         })
+    //         .then((response)=>{
+    //             return response.json();
+    //         })
+    //         .then((data)=>{
+    //             setReady(true);
+    //             return setStudents(data);
+    //         });
+    //     }
+    // }, []);
+
+    if(!ready){
+        setTimeout(()=>{
+        }, 1000);
+    }
 
     return(
         <div className="text-center">
@@ -33,7 +38,7 @@ function AddStudent(){
                 <i className="fa-solid fa-plus"></i> Add Student
             </Link>
 
-            {!ready && <Loader />}
+            {/* {!ready && <Loader />} */}
 
             {/* show students */}
             <div className="m-4">

@@ -10,19 +10,24 @@ function AddRoom(){
     const {rooms, setRooms, ready, setReady}=useContext(RoomsContext); 
 
     //Must be used here as it is shown without pressing a button (unlike login)
-    useEffect(()=>{
-        fetch("http://localhost:5000/api/admin/allRooms", {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then((response)=>{
-            return response.json();
-        })
-        .then((data)=>{
-            setReady(true);
-            return setRooms(data);
-        });
-    }, []);
+    // useEffect(()=>{
+    //     fetch("http://localhost:5000/allRooms", {
+    //         method: 'GET',
+    //         credentials: 'include'
+    //     })
+    //     .then((response)=>{
+    //         return response.json();
+    //     })
+    //     .then((data)=>{
+    //         setReady(true);
+    //         return setRooms(data);
+    //     });
+    // }, []);
+
+    if(!ready){
+        setTimeout(()=>{
+        }, 1000);
+    }
 
     //delete last room
     const handleClick=async(hostel)=>{
@@ -67,7 +72,7 @@ function AddRoom(){
                 <i className="fa-solid fa-plus"></i> Add Room
             </Link>
 
-            {!ready && <Loader />}
+            {/* {!ready && <Loader />} */}
 
             <div className="row m-4">
                 <div className="col">

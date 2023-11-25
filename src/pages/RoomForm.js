@@ -172,7 +172,7 @@ function RoomForm(){
                     </div>
                     <div className="flex items-center py-3 px-4 border-t-2 border-amber-500">
                         <label htmlFor="roomNo" className="w-1/2">Room Number:</label>
-                        <input type="number" name="roomNo" value={roomInfo.roomNo} id="roomNo" disabled />               
+                        <input type="number" name="roomNo" value={roomInfo.roomNo} id="roomNo" readOnly />               
                     </div>
                 </div>
 

@@ -1,21 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
+import PageNotFound from '../components/PageNotFound';
 
 function Login() {
   const {id}=useParams();
-  
-  let role=null;
-
-  if(id==='student'){
-    role='Student';
-  }
-  else if(id==='hostelStaff'){
-    role='Hostel Staff';
-  }
-  else{
-    role='Admin';
-  }
 
   const {setUserInfo}=useContext(UserContext);
 
@@ -30,7 +19,7 @@ function Login() {
   const handleSubmit=async(event)=>{
     event.preventDefault();
     
-    const response=await fetch("http://localhost:5000/api/admin/login", {
+    const response=await fetch(`http://localhost:5000/api/${id}/login`, {  //for different login users
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -43,7 +32,6 @@ function Login() {
 
     if(response.ok){
       alert(res.success);
-      setUser({username: "", password: ""});
       res.user.role=id;  //otherwise we need to reload the page to get role info
       setUserInfo(res.user);
       setRedirect(true);
@@ -59,6 +47,20 @@ function Login() {
 
     // pattern="[A-Za-z]" must be added to name
 
+    let role=null;
+
+  if(id==='student'){
+    role='Student';
+  }
+  else if(id==='hostelStaff'){
+    role='Hostel Staff';
+  }
+  else if(id==='admin'){
+    role='Admin';
+  }
+  else{
+    return <PageNotFound />
+  }
 
   return (
     <div className="mt-20 flex items-center justify-around">
