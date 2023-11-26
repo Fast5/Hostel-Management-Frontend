@@ -25,6 +25,9 @@ function AccountNav(props){
                     <Link to={`/${props.role}/addRoom`} className={handleClasses("addRoom")}>
                         Add Room
                     </Link>
+                    {/* <a href={`/${props.role}/addRoom`}>
+                        Add ERoom
+                    </a> */}
                     <div className="border-l border-gray-300"></div>
                     <Link to={`/${props.role}/addStudent`} className={handleClasses("addStudent")}>
                         Add Student

@@ -11,22 +11,26 @@ function StudentForm(){
 
     const [redirect, setRedirect]=useState(false);
 
-    const {students, setStudents, ready}=useContext(StudentsContext);
+    const {students, setStudents, ready3, setReady3}=useContext(StudentsContext);
 
     useEffect(()=>{
         if(id==='new'){
             return;
         }
-
-        if(ready){
-            const student=students.filter((student)=>{return student._id===id});
-            return setStudentInfo(student[0]);
+        else{
+            if(students.length===0){
+                setReady3(false);
+                return;
+            }
+            else{
+                setStudentInfo(students.filter((student)=>{return student._id===id})[0]);  
+                return; 
+            }
         }
+    }, []);
 
-    }, [ready]);
-
-    if(!ready && id!=='new'){
-        return <Navigate to={"/admin/addStudent"}/>;
+    if(students.length===0 && !ready3 && id!=='new'){  //has to be checked
+        return <Navigate to={"/admin/addStudent"}/>
     }
 
     const handleChange=(event)=>{

@@ -7,26 +7,19 @@ import Loader from "../components/Loader";
 function AddRoom(){
     //make sure to check if the user is admin or not using userContext->role==='admin'=>then only allow (left)
     
-    const {rooms, setRooms, ready, setReady}=useContext(RoomsContext); 
+    const {rooms, setRooms, ready2, setReady2}=useContext(RoomsContext); 
 
-    //Must be used here as it is shown without pressing a button (unlike login)
-    // useEffect(()=>{
-    //     fetch("http://localhost:5000/allRooms", {
-    //         method: 'GET',
-    //         credentials: 'include'
-    //     })
-    //     .then((response)=>{
-    //         return response.json();
-    //     })
-    //     .then((data)=>{
-    //         setReady(true);
-    //         return setRooms(data);
-    //     });
-    // }, []);
-
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
+    useEffect(()=>{
+        if(rooms.length===0){
+            setReady2(false);
+        }
+        else{
+            return;
+        }
+    }, [])
+    
+    if(rooms.length===0 && !ready2){
+        return <Loader />
     }
 
     //delete last room
@@ -71,8 +64,6 @@ function AddRoom(){
             <Link to={"/admin/addRoom/new"} className="text-white bg-red-500 py-2 px-4 rounded-full">
                 <i className="fa-solid fa-plus"></i> Add Room
             </Link>
-
-            {/* {!ready && <Loader />} */}
 
             <div className="row m-4">
                 <div className="col">

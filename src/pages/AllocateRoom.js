@@ -1,21 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AccountNav from "../components/AccountNav";
 import RoomsContext from "../contexts/RoomsContext";
 import UserContext from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import StudentsContext from "../contexts/StudentsContext";
+import Loader from "../components/Loader";
 
 function AllocateRoom(){
-    const {userInfo, ready}=useContext(UserContext);
-    const {rooms, setRooms}=useContext(RoomsContext);
-    const {students, setStudents}=useContext(StudentsContext);
+    const {userInfo, ready1, setReady1}=useContext(UserContext);
+    const {rooms, ready2, setReady2}=useContext(RoomsContext);
+    const {students, setStudents}=useContext(StudentsContext);  //for showing students if room is allocated
     
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
+
+    useEffect(()=>{
+        if(!userInfo){
+            setReady1(false);
+        }
+        if(rooms.length===0){
+            setReady2(false);
+        }
+    }, []);
+
+
+    if(!userInfo || (rooms.length===0 && !ready2)){
+        return <Loader />
     }
 
-    
     const reqRooms=rooms.filter((room)=>{return room.hostel===userInfo.hostel;});
     // console.log(reqRooms);
 

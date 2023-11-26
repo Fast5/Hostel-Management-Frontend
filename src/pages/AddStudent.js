@@ -6,7 +6,21 @@ import StudentsContext from "../contexts/StudentsContext";
 
 function AddStudent(){
 
-    const {students, setStudents, ready, setReady}=useContext(StudentsContext);
+    const {students, ready3, setReady3}=useContext(StudentsContext);
+
+    useEffect(()=>{
+        if(students.length===0){
+            setReady3(false);
+        }
+        else{
+            return;
+        }
+    }, [])
+
+
+    if(students.length===0 && !ready3){
+        return <Loader/>
+    }
 
     // Must be used here as it is shown without pressing a button (unlike login)
     // useEffect(()=>{
@@ -25,10 +39,10 @@ function AddStudent(){
     //     }
     // }, []);
 
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
-    }
+    // if(!ready){
+    //     setTimeout(()=>{
+    //     }, 1000);
+    // }
 
     return(
         <div className="text-center">

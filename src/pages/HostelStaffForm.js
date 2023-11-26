@@ -9,22 +9,42 @@ function HostelStaffForm() {
 
     const [redirect, setRedirect]=useState(false);
 
-    const {hostelStaffs, setHostelStaffs, ready}=useContext(HostelStaffsContext);
+    const {hostelStaffs, setHostelStaffs, ready4, setReady4}=useContext(HostelStaffsContext);
 
     useEffect(()=>{
         if(id==='new'){
             return;
         }
-
-        if(ready){
-            const hostelStaff=hostelStaffs.filter((hostelStaff)=>{return hostelStaff._id===id});
-            return setHostelStaffInfo(hostelStaff[0]);
+        else{
+            if(hostelStaffs.length===0){
+                setReady4(false);
+                return;
+            }
+            else{
+                setHostelStaffInfo(hostelStaffs.filter((hostelStaff)=>{return hostelStaff._id===id})[0]);   
+                return;
+            }
         }
-    }, [ready]);
+    }, []);
 
-    if(!ready && id!=='new'){
-        return <Navigate to={"/admin/addHostelStaff"} />;
+    if(hostelStaffs.length===0 && !ready4 && id!=='new'){  //has to be checked
+        return <Navigate to={"/admin/addHostelStaff"}/>
     }
+
+    // useEffect(()=>{
+    //     if(id==='new'){
+    //         return;
+    //     }
+
+    //     if(ready){
+    //         const hostelStaff=hostelStaffs.filter((hostelStaff)=>{return hostelStaff._id===id});
+    //         return setHostelStaffInfo(hostelStaff[0]);
+    //     }
+    // }, [ready]);
+
+    // if(!ready && id!=='new'){
+    //     return <Navigate to={"/admin/addHostelStaff"} />;
+    // }
 
     const handleChange = (event) => {
         setHostelStaffInfo({ ...hostelStaffInfo, [event.target.name]: event.target.value });

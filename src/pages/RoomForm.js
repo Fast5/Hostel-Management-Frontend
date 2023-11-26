@@ -10,21 +10,26 @@ function RoomForm(){
 
     const [redirect, setRedirect]=useState(false);
 
-    const {rooms, setRooms, ready}=useContext(RoomsContext);   //reload required (solved by setRooms method)
+    const {rooms, setRooms, ready2, setReady2}=useContext(RoomsContext);   //reload required (solved by setRooms method)
     
     useEffect(()=>{
-        if(id==='new'){
-            return;
+        if(rooms.length===0){
+            setReady2(false);
         }
         
-        if(ready){
-            const editRoom=rooms.filter((room)=>{return room._id===id});
-            setRoomInfo(editRoom[0]);
+        if(id!=='new'){
+            setRoomInfo(rooms.filter((room)=>{return room._id===id})[0]);
+            return;
+        }
+        else{
+            return;
         }
 
-    }, [ready]);
+    }, []);
 
-    if(!ready){  //has to be checked
+    // console.log(ready2);
+
+    if(rooms.length===0 && !ready2 && id!=='new'){  //has to be checked
         return <Navigate to={"/admin/addRoom"}/>
     }
 

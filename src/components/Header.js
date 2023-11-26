@@ -1,9 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
 function Header() {
-    const { userInfo } = useContext(UserContext);
+    const {userInfo, setReady1} = useContext(UserContext);
+
+    useEffect(()=>{
+        if(!userInfo){
+            setReady1(false);
+        }
+        else{
+            return;
+        }
+    }, [])
+
+    if(!userInfo){
+        setTimeout(()=>{}, 1000);
+    }
 
     return (
         <header>

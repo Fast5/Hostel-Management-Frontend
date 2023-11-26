@@ -6,23 +6,38 @@ import Loader from "../components/Loader";
 
 function AddHostelStaff(){
 
-    const {hostelStaffs, setHostelStaffs, ready, setReady}=useContext(HostelStaffsContext);
+    const {hostelStaffs, ready4, setReady4}=useContext(HostelStaffsContext);
 
     useEffect(()=>{
-        if(!hostelStaffs.length){
-            fetch("http://localhost:5000/api/admin/allHostelStaffs", {
-                method: 'GET',
-                credentials: 'include'
-            })
-            .then((response)=>{
-                return response.json();
-            })
-            .then((data)=>{
-                setReady(true);
-                return setHostelStaffs(data);
-            });
+        if(hostelStaffs.length===0){
+            setReady4(false);
+            return;
         }
-    }, []);
+        else{
+            return;
+        }
+    }, [])
+
+
+    if(hostelStaffs.length===0 && !ready4){
+        return <Loader/>
+    }
+
+    // useEffect(()=>{
+    //     if(!hostelStaffs.length){
+    //         fetch("http://localhost:5000/api/admin/allHostelStaffs", {
+    //             method: 'GET',
+    //             credentials: 'include'
+    //         })
+    //         .then((response)=>{
+    //             return response.json();
+    //         })
+    //         .then((data)=>{
+    //             setReady(true);
+    //             return setHostelStaffs(data);
+    //         });
+    //     }
+    // }, []);
 
     return(
         <div className="text-center">
@@ -32,7 +47,7 @@ function AddHostelStaff(){
                 <i className="fa-solid fa-plus"></i> Add Hostel Staff
             </Link>
 
-            {!ready && <Loader />}
+            {/* {!ready && <Loader />} */}
 
             <div className="m-4">
                 <div className="flex justify-evenly px-4 py-2">

@@ -7,7 +7,6 @@ function Login() {
   const {id}=useParams();
 
   const {setUserInfo}=useContext(UserContext);
-
   const [user, setUser]=useState({username: "", password: ""});
 
   const [redirect, setRedirect]=useState(false);
@@ -29,7 +28,7 @@ function Login() {
     });
     
     const res=await response.json();
-
+      console.log("Login *** res", res);
     if(response.ok){
       alert(res.success);
       res.user.role=id;  //otherwise we need to reload the page to get role info

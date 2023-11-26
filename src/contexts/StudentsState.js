@@ -4,10 +4,13 @@ import StudentsContext from "./StudentsContext";
 const StudentsState=(props)=>{
 
     const [students, setStudents]=useState([]);
-    const [ready, setReady]=useState(false);
+    const [ready3, setReady3]=useState(true);
 
     useEffect(()=>{
-        if(!students.length){
+        if(ready3){
+            return;
+        }
+        else{
             fetch("http://localhost:5000/allStudents", {
                 method: 'GET',
                 credentials: 'include'  
@@ -16,15 +19,32 @@ const StudentsState=(props)=>{
                 return response.json();
             })
             .then((data)=>{
-                setReady(true);
-                return setStudents(data);
+                setReady3(true);
+                setStudents(data);
+                return;
             });
         }
-    }, []);
+    }, [ready3]);
+
+    // useEffect(()=>{
+    //     if(!students.length){
+    //         fetch("http://localhost:5000/allStudents", {
+    //             method: 'GET',
+    //             credentials: 'include'  
+    //         })
+    //         .then((response)=>{
+    //             return response.json();
+    //         })
+    //         .then((data)=>{
+    //             setReady(true);
+    //             return setStudents(data);
+    //         });
+    //     }
+    // }, []);
 
 
     return(
-        <StudentsContext.Provider value={{students, setStudents, ready, setReady}}>
+        <StudentsContext.Provider value={{students, setStudents, ready3, setReady3}}>
             {props.children}
         </StudentsContext.Provider>
     );

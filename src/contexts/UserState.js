@@ -3,11 +3,13 @@ import UserContext from "./UserContext";
 
 const UserState=(props)=>{
     const [userInfo, setUserInfo]=useState(null);
-
-    const [ready, setReady]=useState(false);
+    const [ready1, setReady1]=useState(true);
 
     useEffect(()=>{
-        if(!userInfo){
+        if(ready1){
+            return;
+        }
+        else{
             fetch("http://localhost:5000/profile", {
                 method: 'GET',
                 credentials: "include"
@@ -16,14 +18,31 @@ const UserState=(props)=>{
                 return response.json();
             })
             .then((data)=>{
-                setReady(true);
-                return setUserInfo(data);
+                setReady1(true);
+                setUserInfo(data);
+                return;
             })
         }
-    }, []);
+    }, [ready1]);
+
+    // useEffect(()=>{
+    //     if(!userInfo){
+    //         fetch("http://localhost:5000/profile", {
+    //             method: 'GET',
+    //             credentials: "include"
+    //         })
+    //         .then((response)=>{
+    //             return response.json();
+    //         })
+    //         .then((data)=>{
+    //             setReady(true);
+    //             return setUserInfo(data);
+    //         })
+    //     }
+    // }, [token]);
 
     return(
-        <UserContext.Provider value={{userInfo, setUserInfo, ready}}>
+        <UserContext.Provider value={{userInfo, setUserInfo, ready1, setReady1}}>
             {props.children}
         </UserContext.Provider>
     );

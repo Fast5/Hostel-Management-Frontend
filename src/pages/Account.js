@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import AccountNav from "../components/AccountNav";
@@ -9,19 +9,23 @@ import RoomsContext from "../contexts/RoomsContext";
 function Account(){
     const {id}=useParams();
 
-    const {userInfo, setUserInfo, ready}=useContext(UserContext);
-    const {rooms}=useContext(RoomsContext);
+    const {userInfo, setUserInfo, ready1, setReady1}=useContext(UserContext);
+    const {rooms, setReady2}=useContext(RoomsContext);
 
     const [redirect, setRedirect]=useState(false);
 
-    if(!ready){
-        setTimeout(()=>{
-        }, 1000);
-    }
+    useEffect(()=>{
+        if(!userInfo){
+            setReady1(false);
+        }
+        if(rooms.length===0){
+            setReady2(false);
+        }
+    }, [])
 
-    // if(!ready && !redirect){
-    //     return <Loader />;
-    // }
+    if(!userInfo && !redirect){
+        return <Loader />
+    }
 
     const handleClick=async()=>{
         const response=await fetch("http://localhost:5000/logout", {
@@ -54,6 +58,10 @@ function Account(){
         );
     }
     else if(id==='student'){
+        if(rooms.length===0 && !redirect){
+            return <Loader />
+        }
+
         return(
             <div>
                 <AccountNav role={id} />
