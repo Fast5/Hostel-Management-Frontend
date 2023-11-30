@@ -28,7 +28,7 @@ function Login() {
     });
     
     const res=await response.json();
-      console.log("Login *** res", res);
+      
     if(response.ok){
       alert(res.success);
       res.user.role=id;  //otherwise we need to reload the page to get role info
@@ -46,7 +46,7 @@ function Login() {
 
     // pattern="[A-Za-z]" must be added to name
 
-    let role=null;
+  let role=null;
 
   if(id==='student'){
     role='Student';

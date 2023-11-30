@@ -13,10 +13,7 @@ function AddRoom(){
         if(rooms.length===0){
             setReady2(false);
         }
-        else{
-            return;
-        }
-    }, [])
+    }, [rooms.length])
     
     if(rooms.length===0 && !ready2){
         return <Loader />
@@ -25,13 +22,13 @@ function AddRoom(){
     //delete last room
     const handleClick=async(hostel)=>{
         let roomIndex;
-        for(let i=0; i<rooms.length; i++){
-            if(rooms[i].hostel===hostel){
+        for(let i=0; i<rooms?.length; i++){
+            if(rooms[i]?.hostel===hostel){
                 roomIndex=i;
             }
         }
 
-        const roomId=rooms[roomIndex]._id;
+        const roomId=rooms[roomIndex]?._id;
 
         const response=await fetch("http://localhost:5000/api/admin/deleteRoom", {
             method: 'DELETE',
@@ -53,9 +50,9 @@ function AddRoom(){
         }
     }
     
-    let bh1Rooms=rooms.filter((room)=>{return room.hostel==='bh1'});
-    let bh2Rooms=rooms.filter((room)=>{return room.hostel==='bh2'});
-    let bh3Rooms=rooms.filter((room)=>{return room.hostel==='bh3'});
+    let bh1Rooms=rooms.filter((room)=>{return room?.hostel==='bh1'});
+    let bh2Rooms=rooms.filter((room)=>{return room?.hostel==='bh2'});
+    let bh3Rooms=rooms.filter((room)=>{return room?.hostel==='bh3'});
 
     return(
         <div className="text-center">
@@ -69,17 +66,17 @@ function AddRoom(){
                 <div className="col">
                     <h1 className="text-lg mb-2">BH-1</h1>
                     <div className="m-2">
-                        {bh1Rooms.length>0 ?  bh1Rooms.map((room, index)=>{
+                        {bh1Rooms?.length>0 ?  bh1Rooms.map((room, index)=>{
                             return(
-                                <Link key={index} to={`/admin/addRoom/${room._id}`}>
+                                <Link key={index} to={`/admin/addRoom/${room?._id}`}>
                                     <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Room No.: </label>
-                                            <h1>{room.roomNo}</h1>
+                                            <h1>{room?.roomNo}</h1>
                                         </div>
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Accomodation Type: </label>
-                                            <h1>{room.accomodationType}</h1>
+                                            <h1>{room?.accomodationType}</h1>
                                         </div>
                                     </div>
                                 </Link>
@@ -87,7 +84,7 @@ function AddRoom(){
                         }) 
                         : "No rooms created"}
 
-                        {bh1Rooms.length>0 && 
+                        {bh1Rooms?.length>0 && 
                             <div className="mb-14">
                                 <button onClick={()=>{handleClick("bh1")}} className="bg-gray-600 text-white px-4 py-2 rounded-full"><i className="fa-solid fa-trash"></i> Delete Room</button>
                             </div>
@@ -97,17 +94,17 @@ function AddRoom(){
                 <div className="col">
                     <h1 className="text-lg mb-2">BH-2</h1>
                     <div className="m-2">
-                        {bh2Rooms.length>0 ?  bh2Rooms.map((room, index)=>{
+                        {bh2Rooms?.length>0 ?  bh2Rooms.map((room, index)=>{
                             return(
-                                <Link key={index} to={`/admin/addRoom/${room._id}`}>
+                                <Link key={index} to={`/admin/addRoom/${room?._id}`}>
                                     <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Room No.: </label>
-                                            <h1>{room.roomNo}</h1>
+                                            <h1>{room?.roomNo}</h1>
                                         </div>
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Accomodation Type: </label>
-                                            <h1>{room.accomodationType}</h1>
+                                            <h1>{room?.accomodationType}</h1>
                                         </div>
                                     </div>
                                 </Link>
@@ -115,7 +112,7 @@ function AddRoom(){
                         }) 
                         : "No rooms created"}
 
-                        {bh2Rooms.length>0 && 
+                        {bh2Rooms?.length>0 && 
                             <div className="mb-14">
                                 <button onClick={()=>{handleClick("bh2")}} className="bg-gray-600 text-white px-4 py-2 rounded-full"><i className="fa-solid fa-trash"></i> Delete Room</button>
                             </div>
@@ -125,17 +122,17 @@ function AddRoom(){
                 <div className="col">
                     <h1 className="text-lg mb-2">BH-3</h1>
                     <div className="m-2">
-                        {bh3Rooms.length>0 ?  bh3Rooms.map((room, index)=>{
+                        {bh3Rooms?.length>0 ?  bh3Rooms.map((room, index)=>{
                             return(
-                                <Link key={index} to={`/admin/addRoom/${room._id}`}>
+                                <Link key={index} to={`/admin/addRoom/${room?._id}`}>
                                     <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Room No.: </label>
-                                            <h1>{room.roomNo}</h1>
+                                            <h1>{room?.roomNo}</h1>
                                         </div>
                                         <div className="flex gap-2 items-center justify-center">
                                             <label>Accomodation Type: </label>
-                                            <h1>{room.accomodationType}</h1>
+                                            <h1>{room?.accomodationType}</h1>
                                         </div>
                                     </div>
                                 </Link>
@@ -143,7 +140,7 @@ function AddRoom(){
                         }) 
                         : "No rooms created"}
 
-                        {bh3Rooms.length>0 && 
+                        {bh3Rooms?.length>0 && 
                             <div className="mb-14">
                                 <button onClick={()=>{handleClick("bh3")}} className="bg-gray-600 text-white px-4 py-2 rounded-full"><i className="fa-solid fa-trash"></i> Delete Room</button>
                             </div>

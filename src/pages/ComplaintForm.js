@@ -4,51 +4,20 @@ import UserContext from "../contexts/UserContext";
 import RoomsContext from "../contexts/RoomsContext";
 import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
+import StudentsContext from "../contexts/StudentsContext";
 
 //for student
 function ComplaintForm(){
     const {id}=useParams();  //either new or complaint Id for viewing and marking resolved
 
-    function getCurrentDateTimeIndia() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-  
-        // Format: "YYYY-MM-DDThh:mm"
-        return `${year}-${month}-${day}T${hours}:${minutes}`;
-    }
-
     const [complaint, setComplaint]=useState({phoneNo: "", type: "", details: "", dateTime: getCurrentDateTimeIndia(), status: "open"});
 
     const [redirect, setRedirect]=useState(false);
 
-    const {userInfo, ready1, setReady1}=useContext(UserContext);
+    const {userInfo, setUserInfo, ready1, setReady1}=useContext(UserContext);
     const {rooms, ready2, setReady2}=useContext(RoomsContext);
     const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
-
-    // useEffect(()=>{
-    //     if(id==='new'){
-    //         return;
-    //     }
-    //     else{
-    //         // fetch("http://localhost:5000/allComplaints", {
-    //         //     method: 'GET',
-    //         //     credentials: "include"
-    //         // })
-    //         // .then((response)=>{
-    //         //     return response.json();
-    //         // })
-    //         // .then((data)=>{
-    //         //     // const complaint=
-    //         //     setComplaint(data.filter((complaint)=>{return complaint._id===id})[0]);
-    //         // })
-    //     }
-    // }, []);
-    
-    // console.log(useLocation());
+    const {setStudents}=useContext(StudentsContext);
 
     useEffect(()=>{
         if(!userInfo){
@@ -67,23 +36,28 @@ function ComplaintForm(){
                 setReady5(false);
             }
             else{
-                // if(complaints.length!==0){
-                    setComplaint(complaints.filter((complaint)=>{return complaint?._id===id})[0]);
-                // }
+                setComplaint(complaints.filter((complaint)=>{return complaint?._id===id})[0]);
             }
         }
-    }, [userInfo, rooms, complaints, id])
-    
-    // if(rooms.length===0 || !userInfo){
-    //     return <Loader />;
-    // }
-    // console.log(userInfo)
-    
-    // console.log(complaint);
+    }, [userInfo, rooms.length, complaints.length, id])
 
-    // if(!ready1 || !ready2 || !ready5){
-    //     return <Loader />
-    // }
+    if((!userInfo && !ready1) || (rooms.length===0 && !ready2) || (complaint.length===0 && !ready5)){
+        return <Loader />
+    }
+
+    
+    function getCurrentDateTimeIndia() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+  
+        // Format: "YYYY-MM-DDThh:mm"
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    
 
     const handleChange=(event)=>{
         setComplaint({...complaint, [event.target.name]: event.target.value});
@@ -110,6 +84,7 @@ function ComplaintForm(){
 
             if(response.ok){
                 alert(res.success);
+                setUserInfo(res.userInfo);
                 setComplaints(res.complaints);
                 setRedirect(true);
             }
@@ -132,7 +107,6 @@ function ComplaintForm(){
 
             if(response.ok){
                 alert(res.success);
-                // console.log(complaints);
                 setComplaints(res.complaints);
                 setRedirect(true);
             }
@@ -167,13 +141,13 @@ function ComplaintForm(){
                     </div>
                     <div className="w-2/4">
                         <label htmlFor="hostel">Hostel</label>
-                        <input type="text" id="hostel" value={rooms.filter((room)=>{return room._id===userInfo?.roomId})[0]?.hostel} readOnly />
+                        <input type="text" id="hostel" value={rooms.filter((room)=>{return room?._id===userInfo?.roomId})[0]?.hostel} readOnly />
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <div className="w-2/4">
                         <label htmlFor="roomNo">Room No</label>
-                        <input type="text" id="roomNo" value={rooms.filter((room)=>{return room._id===userInfo?.roomId})[0]?.roomNo} readOnly />
+                        <input type="text" id="roomNo" value={rooms.filter((room)=>{return room?._id===userInfo?.roomId})[0]?.roomNo} readOnly />
                     </div>
                     <div className="w-2/4">
                         <label htmlFor="type">Complaint Type</label>
@@ -207,7 +181,7 @@ function ComplaintForm(){
                             ) 
                             : 
                             (   
-                                <select name="status" id="status" value={complaint?.status} onChange={handleChange} className="w-full border my-1 py-2 px-3 rounded-2xl" disabled={complaints.filter((complaint)=>{return complaint?._id===id})[0].status==='resolved'}>
+                                <select name="status" id="status" value={complaint?.status} onChange={handleChange} className="w-full border my-1 py-2 px-3 rounded-2xl" disabled={complaints.filter((complaint)=>{return complaint?._id===id})[0]?.status==='resolved'}>
                                     {complaints.filter((complaint)=>{return complaint?._id===id})[0]?.status==='inProgress' ? 
                                         <option value="inProgress">In-Progress</option>
                                         :
@@ -220,7 +194,7 @@ function ComplaintForm(){
                     </div>
                 </div>
 
-                {complaints.filter((complaint)=>{return complaint?._id===id})[0].status!=='resolved' &&
+                {complaints.filter((complaint)=>{return complaint?._id===id})[0]?.status!=='resolved' &&
                     <button type="submit" className="text-white mt-4 bg-red-500 py-2 px-4 w-full rounded-full">{id==='new' ? "Register Complaint" : "Update Status"}</button>
                 }
             </form>

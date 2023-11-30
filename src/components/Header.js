@@ -1,22 +1,20 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
+import Loader from "./Loader";
 
 function Header() {
-    const {userInfo, setReady1} = useContext(UserContext);
+    const {userInfo, ready1, setReady1} = useContext(UserContext);
 
     useEffect(()=>{
         if(!userInfo){
             setReady1(false);
         }
-        else{
-            return;
-        }
-    }, [])
+    }, [userInfo])
 
-    if(!userInfo){
-        setTimeout(()=>{}, 1000);
-    }
+    // if(!userInfo && !ready1){
+    //     return <Loader/>
+    // }
 
     return (
         <header>
@@ -35,8 +33,8 @@ function Header() {
                     </Link>
 
                     {userInfo ? (
-                        <Link to={`/${userInfo.role}/account`} className="bg-white p-2 rounded-md">
-                            <i className="fa-solid fa-user"></i> {userInfo.name}
+                        <Link to={`/${userInfo?.role}/account`} className="bg-white p-2 rounded-md">
+                            <i className="fa-solid fa-user"></i> {userInfo?.name}
                         </Link>
                     ) : (
                         <div className="dropdown">

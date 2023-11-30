@@ -20,18 +20,19 @@ function StudentForm(){
         else{
             if(students.length===0){
                 setReady3(false);
-                return;
             }
             else{
                 setStudentInfo(students.filter((student)=>{return student._id===id})[0]);  
-                return; 
             }
         }
-    }, []);
+    }, [id, students.length]);
 
-    if(students.length===0 && !ready3 && id!=='new'){  //has to be checked
-        return <Navigate to={"/admin/addStudent"}/>
+    if(students.length===0 && !ready3){
+        return <Loader />
     }
+    // if(students.length===0 && !ready3 && id!=='new'){  //has to be checked
+    //     return <Navigate to={"/admin/addStudent"}/>
+    // }
 
     const handleChange=(event)=>{
         setStudentInfo({...studentInfo, [event.target.name]: event.target.value});
@@ -116,36 +117,36 @@ function StudentForm(){
             <form onSubmit={handleSubmit} className="w-2/4 mb-3">
 
                 <label htmlFor="name">Full Name</label>
-                <input type="text" id="name" name="name" value={studentInfo.name} onChange={handleChange} required autoComplete="off" className="inline" />
+                <input type="text" id="name" name="name" value={studentInfo?.name} onChange={handleChange} required autoComplete="off" className="inline" />
                 
                 <div className="flex gap-2">
                     <div className="w-2/4">
                         <label htmlFor="rollNo">Roll Number</label>
-                        <input type="text" id="rollNo" name="rollNo" value={studentInfo.rollNo} onChange={handleChange}  required autoComplete="off" />
+                        <input type="text" id="rollNo" name="rollNo" value={studentInfo?.rollNo} onChange={handleChange}  required autoComplete="off" />
                     </div>
                     <div className="w-2/4">
                         <label htmlFor="phoneNo">Personal Mobile Number</label>
-                        <input type="tel" id="phoneNo" name="phoneNo" value={studentInfo.phoneNo} onChange={handleChange} required autoComplete="off" pattern="[0-9]{10}" title="valid 10 digit number" className="w-full border my-1 py-2 px-3 rounded-2xl"/>
+                        <input type="tel" id="phoneNo" name="phoneNo" value={studentInfo?.phoneNo} onChange={handleChange} required autoComplete="off" pattern="[0-9]{10}" title="valid 10 digit number" className="w-full border my-1 py-2 px-3 rounded-2xl"/>
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <div className="w-2/4">
                         <label htmlFor="guardianName">Guardian Name</label>
-                        <input type="text" id="guardianName" name="guardianName" value={studentInfo.guardianName} onChange={handleChange} required autoComplete="off" />
+                        <input type="text" id="guardianName" name="guardianName" value={studentInfo?.guardianName} onChange={handleChange} required autoComplete="off" />
                     </div>
                     <div className="w-2/4">
                         <label htmlFor="guardianPhoneNo">Guardian Mobile Number</label>
-                        <input type="tel" id="guardianPhoneNo" name="guardianPhoneNo" value={studentInfo.guardianPhoneNo} onChange={handleChange} required autoComplete="off" pattern="[0-9]{10}" title="valid 10 digit number" className="w-full border my-1 py-2 px-3 rounded-2xl"/>
+                        <input type="tel" id="guardianPhoneNo" name="guardianPhoneNo" value={studentInfo?.guardianPhoneNo} onChange={handleChange} required autoComplete="off" pattern="[0-9]{10}" title="valid 10 digit number" className="w-full border my-1 py-2 px-3 rounded-2xl"/>
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <div className="w-2/4">
                         <label htmlFor="username">Username</label>
-                        <input type="email" id="username" name="username" value={studentInfo.username} onChange={handleChange} required autoComplete="off" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Valid email-id" />
+                        <input type="email" id="username" name="username" value={studentInfo?.username} onChange={handleChange} required autoComplete="off" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Valid email-id" />
                     </div>
                     <div className="w-2/4">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" name="password" value={studentInfo.password} onChange={handleChange} required pattern=".{8,}" title="Eight or more characters" />
+                        <input type="password" id="password" name="password" value={studentInfo?.password} onChange={handleChange} required pattern=".{8,}" title="Eight or more characters" />
                     </div>
                 </div>
 

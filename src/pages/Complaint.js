@@ -10,20 +10,20 @@ import Loader from "../components/Loader";
 function Complaint(){
     const {id}=useParams();
 
-    const {students, ready3, setReady3}=useContext(StudentsContext);
     const {rooms, ready2, setReady2}=useContext(RoomsContext);
+    const {students, ready3, setReady3}=useContext(StudentsContext);
     const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
 
     const [status, setStatus]=useState('');
     const [redirect, setRedirect]=useState(false);
 
     useEffect(()=>{
-        if(students.length===0){
-            setReady3(false);
-        }
-
         if(rooms.length===0){
             setReady2(false);
+        }
+
+        if(students.length===0){
+            setReady3(false);
         }
 
         if(complaints.length===0){
@@ -32,24 +32,18 @@ function Complaint(){
         else{
             setStatus(complaints.filter((complaint)=>{return complaint._id===id})[0].status);
         }
-    }, [students, rooms, complaints]);
+    }, [students.length, rooms.length, complaints.length]);
 
 
-    if(complaints.length===0){
+    if((rooms.length===0 && !ready2) || (students.length===0 && !ready3) || (complaints.length===0 && !ready5)){
         return <Loader />
     }
 
-    // setTimeout(()=>{
-    //     return <Loader />
-    // }, 1000);
+    const reqComplaint=complaints.filter((complaint)=>{return complaint?._id===id})[0];
 
-    const reqComplaint=complaints.filter((complaint)=>{return complaint._id===id})[0];
+    const reqStudent=students.filter((student)=>{return student?._id===reqComplaint?.studentId})[0];
 
-    const reqStudent=students.filter((student)=>{return student._id===reqComplaint.studentId})[0];
-
-    const reqRoom=rooms.filter((room)=>{return room._id===reqComplaint.roomId})[0];
-    // console.log('ReqComplaint :', reqComplaint);
-    // console.log(reqStudent);
+    const reqRoom=rooms.filter((room)=>{return room?._id===reqComplaint?.roomId})[0];
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
@@ -133,7 +127,7 @@ function Complaint(){
                     </div>
                     <div className="w-2/4">
                         <p><label htmlFor="status">Complaint Status</label></p>
-                            <select name="status" id="status" value={status} onChange={(event)=>{setStatus(event.target.value)}} className="w-full border my-1 py-2 px-3 rounded-2xl" disabled={complaints.filter((complaint)=>{return complaint._id===id})[0].status==='inProgress'}> 
+                            <select name="status" id="status" value={status} onChange={(event)=>{setStatus(event.target.value)}} className="w-full border my-1 py-2 px-3 rounded-2xl" disabled={complaints.filter((complaint)=>{return complaint?._id===id})[0]?.status==='inProgress'}> 
                                 <option value="open">Open</option>
                                 <option value="inProgress">In-Progress</option>
                             </select>
@@ -141,7 +135,7 @@ function Complaint(){
                 </div>
 
                 {/* As complaint is not yet updated. */}
-                {complaints.filter((complaint)=>{return complaint._id===id})[0].status==='open' && 
+                {complaints.filter((complaint)=>{return complaint?._id===id})[0]?.status==='open' && 
                     <button type="submit" className="text-white mt-4 bg-red-500 py-2 px-4 w-full rounded-full">Update Status</button>
                 }
             </form>

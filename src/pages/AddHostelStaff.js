@@ -11,33 +11,13 @@ function AddHostelStaff(){
     useEffect(()=>{
         if(hostelStaffs.length===0){
             setReady4(false);
-            return;
         }
-        else{
-            return;
-        }
-    }, [])
+    }, [hostelStaffs.length])
 
 
     if(hostelStaffs.length===0 && !ready4){
         return <Loader/>
     }
-
-    // useEffect(()=>{
-    //     if(!hostelStaffs.length){
-    //         fetch("http://localhost:5000/api/admin/allHostelStaffs", {
-    //             method: 'GET',
-    //             credentials: 'include'
-    //         })
-    //         .then((response)=>{
-    //             return response.json();
-    //         })
-    //         .then((data)=>{
-    //             setReady(true);
-    //             return setHostelStaffs(data);
-    //         });
-    //     }
-    // }, []);
 
     return(
         <div className="text-center">
@@ -57,15 +37,15 @@ function AddHostelStaff(){
                 </div>
                 {hostelStaffs.length>0 ? hostelStaffs.map((hostelStaff, index)=>{
                     return(
-                        <Link to={`/admin/addHostelStaff/${hostelStaff._id}`} key={index} className="flex justify-evenly bg-gray-100 p-2 rounded-2xl m-2">
+                        <Link to={`/admin/addHostelStaff/${hostelStaff?._id}`} key={index} className="flex justify-evenly bg-gray-100 p-2 rounded-2xl m-2">
                             <div>
-                                {hostelStaff.name} 
+                                {hostelStaff?.name} 
                             </div>
                             <div>
-                                {hostelStaff.hostel} 
+                                {hostelStaff?.hostel} 
                             </div>
                             <div>
-                                {hostelStaff.username}
+                                {hostelStaff?.username}
                             </div>
                         </Link>
                     );

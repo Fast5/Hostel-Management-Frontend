@@ -12,37 +12,12 @@ function AddStudent(){
         if(students.length===0){
             setReady3(false);
         }
-        else{
-            return;
-        }
-    }, [])
+    }, [students.length])
 
 
     if(students.length===0 && !ready3){
         return <Loader/>
     }
-
-    // Must be used here as it is shown without pressing a button (unlike login)
-    // useEffect(()=>{
-    //     if(!students.length){
-    //         fetch("http://localhost:5000/api/admin/allStudents", {
-    //             method: 'GET',
-    //             credentials: 'include'  
-    //         })
-    //         .then((response)=>{
-    //             return response.json();
-    //         })
-    //         .then((data)=>{
-    //             setReady(true);
-    //             return setStudents(data);
-    //         });
-    //     }
-    // }, []);
-
-    // if(!ready){
-    //     setTimeout(()=>{
-    //     }, 1000);
-    // }
 
     return(
         <div className="text-center">
@@ -52,9 +27,6 @@ function AddStudent(){
                 <i className="fa-solid fa-plus"></i> Add Student
             </Link>
 
-            {/* {!ready && <Loader />} */}
-
-            {/* show students */}
             <div className="m-4">
                 <div className="flex justify-evenly p-2">
                     <div>Name</div>
@@ -63,15 +35,15 @@ function AddStudent(){
                 </div>
                 {students.length>0 ? students.map((student, index)=>{
                     return(
-                        <Link to={`/admin/addStudent/${student._id}`} key={index} className="flex justify-evenly bg-gray-100 p-2 rounded-2xl m-2">
+                        <Link to={`/admin/addStudent/${student?._id}`} key={index} className="flex justify-evenly bg-gray-100 p-2 rounded-2xl m-2">
                             <div>
-                                {student.name} 
+                                {student?.name} 
                             </div>
                             <div>
-                                {student.rollNo} 
+                                {student?.rollNo} 
                             </div>
                             <div>
-                                {student.username}
+                                {student?.username}
                             </div>
                         </Link>
                     );

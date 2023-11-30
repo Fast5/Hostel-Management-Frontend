@@ -12,19 +12,6 @@ function Complaints(){
     const {rooms, ready2, setReady2}=useContext(RoomsContext);
     const {complaints, ready5, setReady5}=useContext(ComplaintContext);
 
-    function convertToTitleCase(text) {
-        // Split the text into words
-        let words = text.split(/(?=[A-Z])|_/);
-        
-        // Capitalize the first letter of each word
-        let titleCaseWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
-        
-        // Join the words back together
-        let titleCaseText = titleCaseWords.join(' ');
-        
-        return titleCaseText+" Related";
-    }
-
     useEffect(()=>{
         if(!userInfo){
             setReady1(false);
@@ -38,10 +25,23 @@ function Complaints(){
             setReady5(false);
         }
 
-    }, [userInfo, rooms, complaints]);
+    }, [userInfo, rooms.length, complaints.length]);
 
-    if(!userInfo){
+    if((!userInfo && !ready1) || (rooms.length===0 && !ready2) || (complaints.length===0 && !ready5)){
         return <Loader />
+    }
+
+    function convertToTitleCase(text) {
+        // Split the text into words
+        let words = text.split(/(?=[A-Z])|_/);
+        
+        // Capitalize the first letter of each word
+        let titleCaseWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+        
+        // Join the words back together
+        let titleCaseText = titleCaseWords.join(' ');
+        
+        return titleCaseText+" Related";
     }
 
     let reqRooms=rooms.filter((room)=>{return room.hostel===userInfo.hostel});
@@ -59,16 +59,16 @@ function Complaints(){
             <div className="text-center max-w-lg mx-auto m-4">
                 {reqComplaints?.length>0 ? reqComplaints?.map((complaint, index)=>{
                     return(
-                        <Link key={index} to={`/hostelStaff/viewComplaint/${complaint._id}`}>
+                        <Link key={index} to={`/hostelStaff/viewComplaint/${complaint?._id}`}>
                             <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                 <div className="flex justify-center gap-4">
                                     <div className="flex gap-2 items-center justify-center">
                                         <label>Complaint Type: </label>
-                                        <h1>{convertToTitleCase(complaint.type)}</h1>
+                                        <h1>{convertToTitleCase(complaint?.type)}</h1>
                                     </div>
                                     <div className="flex gap-2 items-center justify-center">
                                         <label>Status: </label>
-                                        <h1>{complaint.status}</h1>
+                                        <h1>{complaint?.status}</h1>
                                     </div>
                                 </div>
                             </div>

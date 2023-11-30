@@ -10,8 +10,6 @@ function AddComplaint(){
     const {userInfo, ready1, setReady1}=useContext(UserContext);
     const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
 
-    const [reqComplaints, setReqComplaints]=useState([]);
-
     useEffect(()=>{
         if(!userInfo){
             setReady1(false);
@@ -20,22 +18,14 @@ function AddComplaint(){
         if(complaints.length===0){
             setReady5(false);
         }
-        else{
-            setReqComplaints(complaints.filter((complaint)=>{return userInfo?.complaints.includes(complaint._id)}));
-        }
+    }, [userInfo, complaints.length]);
 
-    }, [userInfo, complaints]);
 
-    // if(!ready5 && complaints.length===0){
-    //     return <Loader />
-    // }    
-
-    if(!ready1 && !userInfo){
+    if((!userInfo && !ready1) || (complaints.length===0 && !ready5)){
         return <Loader/>
     }
-    // console.log(reqComplaints);
 
-    // console.log(complaints);
+    const reqComplaints=complaints.filter((complaint)=>{return userInfo?.complaints.includes(complaint?._id)});
         
     function convertToTitleCase(text) {
         // Split the text into words
@@ -63,19 +53,19 @@ function AddComplaint(){
             }
 
             {/* show previous complaints */}
-            <div className="text-center max-w-lg mx-auto m-4">
+            <div className="text-center max-w-lg mx-auto mt-4 mb-20">
                 {reqComplaints.length>0 ? reqComplaints.map((complaint, index)=>{
                     return(
-                        <Link key={index} to={`/student/addComplaint/${complaint._id}`}>
+                        <Link key={index} to={`/student/addComplaint/${complaint?._id}`}>
                             <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                 <div className="flex justify-center gap-4">
                                     <div className="flex gap-2 items-center justify-center">
                                         <label>Complaint Type: </label>
-                                        <h1>{convertToTitleCase(complaint.type)}</h1>
+                                        <h1>{convertToTitleCase(complaint?.type)}</h1>
                                     </div>
                                     <div className="flex gap-2 items-center justify-center">
                                         <label>Status: </label>
-                                        <h1>{complaint.status}</h1>
+                                        <h1>{complaint?.status}</h1>
                                     </div>
                                 </div>
                             </div>

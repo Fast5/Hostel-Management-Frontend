@@ -12,25 +12,18 @@ function RoomForm(){
 
     const {rooms, setRooms, ready2, setReady2}=useContext(RoomsContext);   //reload required (solved by setRooms method)
     
-    useEffect(()=>{
+    useEffect(()=>{        
         if(rooms.length===0){
             setReady2(false);
         }
-        
-        if(id!=='new'){
-            setRoomInfo(rooms.filter((room)=>{return room._id===id})[0]);
-            return;
-        }
-        else{
-            return;
+        else if(id!=='new'){
+            setRoomInfo(rooms.find((room)=>{return room._id===id}));
         }
 
-    }, []);
+    }, [id, rooms.length]);
 
-    // console.log(ready2);
-
-    if(rooms.length===0 && !ready2 && id!=='new'){  //has to be checked
-        return <Navigate to={"/admin/addRoom"}/>
+    if(rooms.length===0 && !ready2){
+        return <Loader />
     }
 
     let bh1Rooms=0, bh2Rooms=0, bh3Rooms=0;
@@ -111,7 +104,6 @@ function RoomForm(){
         }
     }
 
-
     if(redirect){
         return <Navigate to={"/admin/addRoom"}/>
     }
@@ -143,15 +135,15 @@ function RoomForm(){
                                  :
                                     <div className="flex justify-between">
                                         <div className="flex gap-1">
-                                            <input type="radio" name="hostel" value="bh1" checked={roomInfo.hostel==='bh1'} id="bh1" disabled />
+                                            <input type="radio" name="hostel" value="bh1" checked={roomInfo?.hostel==='bh1'} id="bh1" disabled />
                                             <label htmlFor="bh1">BH-1</label>
                                         </div>
                                         <div className="flex gap-1">
-                                            <input type="radio" name="hostel" value="bh2" checked={roomInfo.hostel==='bh2'} id="bh2" disabled/>
+                                            <input type="radio" name="hostel" value="bh2" checked={roomInfo?.hostel==='bh2'} id="bh2" disabled/>
                                             <label htmlFor="bh2">BH-2</label>
                                         </div>
                                         <div className="flex gap-1">
-                                            <input type="radio" name="hostel" value="bh3" checked={roomInfo.hostel==='bh3'} id="bh3" disabled/>
+                                            <input type="radio" name="hostel" value="bh3" checked={roomInfo?.hostel==='bh3'} id="bh3" disabled/>
                                             <label htmlFor="bh3">BH-3</label>
                                         </div>
                                     </div>
@@ -164,11 +156,11 @@ function RoomForm(){
 
                                 <div className="flex gap-5">
                                     <div className="flex gap-1">
-                                        <input type="radio" name="accomodationType" onChange={handleChange} value="double" checked={roomInfo.accomodationType==='double'} id="double" required/>
+                                        <input type="radio" name="accomodationType" onChange={handleChange} value="double" checked={roomInfo?.accomodationType==='double'} id="double" required/>
                                         <label htmlFor="double">Double</label>
                                     </div>
                                     <div className="flex gap-1">
-                                        <input type="radio" name="accomodationType" onChange={handleChange} value="single" checked={roomInfo.accomodationType==='single'} id="single" />
+                                        <input type="radio" name="accomodationType" onChange={handleChange} value="single" checked={roomInfo?.accomodationType==='single'} id="single" />
                                         <label htmlFor="single">Single</label>
                                     </div>
                                 </div>
@@ -177,7 +169,7 @@ function RoomForm(){
                     </div>
                     <div className="flex items-center py-3 px-4 border-t-2 border-amber-500">
                         <label htmlFor="roomNo" className="w-1/2">Room Number:</label>
-                        <input type="number" name="roomNo" value={roomInfo.roomNo} id="roomNo" readOnly />               
+                        <input type="number" name="roomNo" value={roomInfo?.roomNo} id="roomNo" readOnly />               
                     </div>
                 </div>
 

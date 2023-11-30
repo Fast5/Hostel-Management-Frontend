@@ -10,7 +10,7 @@ function Account(){
     const {id}=useParams();
 
     const {userInfo, setUserInfo, ready1, setReady1}=useContext(UserContext);
-    const {rooms, setReady2}=useContext(RoomsContext);
+    const {rooms, ready2, setReady2}=useContext(RoomsContext);
 
     const [redirect, setRedirect]=useState(false);
 
@@ -21,7 +21,7 @@ function Account(){
         if(rooms.length===0){
             setReady2(false);
         }
-    }, [])
+    }, [userInfo, rooms.length])
 
     if(!userInfo && !redirect){
         return <Loader />
@@ -50,7 +50,7 @@ function Account(){
                 <AccountNav role={id} />
     
                 <div className="text-center max-w-lg mx-auto">
-                    Logged in as {userInfo.name} ({userInfo.username})
+                    Logged in as {userInfo?.name} ({userInfo?.username})
                     <br />
                     <button onClick={handleClick} className="bg-red-500 text-white max-w-sm w-full py-2 mt-2 rounded-2xl">Logout</button>
                 </div>
@@ -58,7 +58,7 @@ function Account(){
         );
     }
     else if(id==='student'){
-        if(rooms.length===0 && !redirect){
+        if(rooms.length===0 && !ready2 && !redirect){
             return <Loader />
         }
 
@@ -69,38 +69,38 @@ function Account(){
                 <div className="text-center max-w-lg mx-auto mb-20">
                     <div className="flex items-center gap-32">
                         <label htmlFor="name">Name</label>
-                        <input type="text" id="name" value={userInfo.name} readOnly/>
+                        <input type="text" id="name" value={userInfo?.name} readOnly/>
                     </div>
                     <div className="flex items-center gap-28">
                         <label htmlFor="rollNo" className="whitespace-nowrap">Roll No.</label>
-                        <input type="text" id="rollNo" value={userInfo.rollNo} readOnly/>
+                        <input type="text" id="rollNo" value={userInfo?.rollNo} readOnly/>
                     </div>
                     <div className="flex items-center gap-24">
                         <label htmlFor="phoneNo" className="whitespace-nowrap">Phone No.</label>
-                        <input type="text" id="phoneNo" value={userInfo.phoneNo} readOnly/>
+                        <input type="text" id="phoneNo" value={userInfo?.phoneNo} readOnly/>
                     </div>
                     <div className="flex items-center gap-14">
                         <label htmlFor="guardianName" className="whitespace-nowrap">Guardian Name</label>
-                        <input type="text" id="guardianName" value={userInfo.guardianName} readOnly/>
+                        <input type="text" id="guardianName" value={userInfo?.guardianName} readOnly/>
                     </div>
                     <div className="flex items-center gap-4">
                         <label htmlFor="guardianPhoneNo" className="whitespace-nowrap">Guardian Phone No.</label>
-                        <input type="text" id="guardianPhoneNo" value={userInfo.guardianPhoneNo} readOnly/>
+                        <input type="text" id="guardianPhoneNo" value={userInfo?.guardianPhoneNo} readOnly/>
                     </div>
                     <div className="flex items-center gap-24">
                         <label htmlFor="username">Username</label>
-                        <input type="text" id="username" value={userInfo.username} readOnly/>
+                        <input type="text" id="username" value={userInfo?.username} readOnly/>
                     </div>
                     {
-                        userInfo.roomId && 
+                        userInfo?.roomId && 
                         <div>
                             <div className="flex items-center gap-[7.5rem]">
                                 <label htmlFor="hostel">Hostel</label>
-                                <input type="text" id="hostel" value={rooms.filter((room)=>{return room._id===userInfo.roomId})[0].hostel} readOnly/>
+                                <input type="text" id="hostel" value={rooms.filter((room)=>{return room._id===userInfo?.roomId})[0]?.hostel} readOnly/>
                             </div>
                             <div className="flex items-center gap-24">
                                 <label htmlFor="roomNo" className="whitespace-nowrap">Room No.</label>
-                                <input type="text" id="roomNo" value={rooms.filter((room)=>{return room._id===userInfo.roomId})[0].roomNo} readOnly/>
+                                <input type="text" id="roomNo" value={rooms.filter((room)=>{return room._id===userInfo?.roomId})[0]?.roomNo} readOnly/>
                             </div>
                         </div>
                     }
@@ -118,15 +118,15 @@ function Account(){
                 <div className="text-center max-w-lg mx-auto mb-20">
                     <div className="flex items-center gap-14">
                         <label htmlFor="name">Name:</label>
-                        <input type="text" id="name" value={userInfo.name} readOnly/>
+                        <input type="text" id="name" value={userInfo?.name} readOnly/>
                     </div>
                     <div className="flex items-center gap-14">
                         <label htmlFor="hostel" className="whitespace-nowrap">Hostel:</label>
-                        <input type="text" id="hostel" value={userInfo.hostel} readOnly/>
+                        <input type="text" id="hostel" value={userInfo?.hostel} readOnly/>
                     </div>
                     <div className="flex items-center gap-8">
                         <label htmlFor="username">Username:</label>
-                        <input type="text" id="username" value={userInfo.username} readOnly/>
+                        <input type="text" id="username" value={userInfo?.username} readOnly/>
                     </div>
 
                     <button onClick={handleClick} className="bg-red-500 text-white max-w-sm w-full py-2 mt-4 rounded-2xl">Logout</button>
