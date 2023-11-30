@@ -71,7 +71,7 @@ function AccountNav(props){
                         Allocate Room
                     </Link>
                     <div className="border-l border-gray-300"></div>
-                    <Link to={`/${props.role}/viewComplaints`} className={handleClasses("viewComplaint")}>
+                    <Link to={`/${props.role}/viewComplaints`} className={handleClasses("viewComplaints")}>
                         View Complaints
                     </Link>
                 </nav>

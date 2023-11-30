@@ -9,7 +9,7 @@ const RoomsState = (props) => {
     // const token = UserC.token;
 
     useEffect(() => {
-        // console.log("ROOM *** token", token);
+    
         if(ready2){
             return;
         }

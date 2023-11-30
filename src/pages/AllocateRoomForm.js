@@ -29,6 +29,7 @@ function AllocateRoomForm(){
 
         if(students.length===0){
             setReady3(false);
+            return;
         }        
     }, []);
 

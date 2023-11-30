@@ -1,22 +1,53 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AccountNav from "../components/AccountNav";
 import { Link } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import Loader from "../components/Loader";
+import ComplaintContext from "../contexts/ComplaintContext";
 
 function AddComplaint(){
 
     const {userInfo, ready1, setReady1}=useContext(UserContext);
+    const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
+
+    const [reqComplaints, setReqComplaints]=useState([]);
 
     useEffect(()=>{
         if(!userInfo){
             setReady1(false);
-            return;
         }
-    }, []);
+ 
+        if(complaints.length===0){
+            setReady5(false);
+        }
+        else{
+            setReqComplaints(complaints.filter((complaint)=>{return userInfo?.complaints.includes(complaint._id)}));
+        }
 
-    if(!userInfo && !ready1){
+    }, [userInfo, complaints]);
+
+    // if(!ready5 && complaints.length===0){
+    //     return <Loader />
+    // }    
+
+    if(!ready1 && !userInfo){
         return <Loader/>
+    }
+    // console.log(reqComplaints);
+
+    // console.log(complaints);
+        
+    function convertToTitleCase(text) {
+        // Split the text into words
+        let words = text.split(/(?=[A-Z])|_/);
+        
+        // Capitalize the first letter of each word
+        let titleCaseWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+        
+        // Join the words back together
+        let titleCaseText = titleCaseWords.join(' ');
+        
+        return titleCaseText+" Related";
     }
 
     return(
@@ -32,6 +63,28 @@ function AddComplaint(){
             }
 
             {/* show previous complaints */}
+            <div className="text-center max-w-lg mx-auto m-4">
+                {reqComplaints.length>0 ? reqComplaints.map((complaint, index)=>{
+                    return(
+                        <Link key={index} to={`/student/addComplaint/${complaint._id}`}>
+                            <div className="bg-gray-100 p-2 rounded-2xl mb-4">
+                                <div className="flex justify-center gap-4">
+                                    <div className="flex gap-2 items-center justify-center">
+                                        <label>Complaint Type: </label>
+                                        <h1>{convertToTitleCase(complaint.type)}</h1>
+                                    </div>
+                                    <div className="flex gap-2 items-center justify-center">
+                                        <label>Status: </label>
+                                        <h1>{complaint.status}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    );
+                }) 
+                : "No record of complaints"}
+            </div>
+
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AccountNav from "../components/AccountNav";
 import RoomsContext from "../contexts/RoomsContext";
 import UserContext from "../contexts/UserContext";
@@ -10,7 +10,6 @@ function AllocateRoom(){
     const {userInfo, ready1, setReady1}=useContext(UserContext);
     const {rooms, ready2, setReady2}=useContext(RoomsContext);
     const {students, setStudents}=useContext(StudentsContext);  //for showing students if room is allocated
-    
 
     useEffect(()=>{
         if(!userInfo){
@@ -36,7 +35,7 @@ function AllocateRoom(){
             <div className="text-center max-w-lg mx-auto">
                 {reqRooms.length>0 ?  reqRooms.map((room, index)=>{
                     return(
-                        <Link key={index} to={`/hostelStaff/allocateRoom/${room._id}`} className="">
+                        <Link key={index} to={`/hostelStaff/allocateRoom/${room._id}`}>
                             <div className="bg-gray-100 p-2 rounded-2xl mb-4">
                                 <div className="flex justify-center gap-4">
                                     <div className="flex gap-2 items-center justify-center">
