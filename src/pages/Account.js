@@ -29,8 +29,8 @@ function Account(){
 
     const handleClick=async()=>{
         const response=await fetch(`${process.env.REACT_APP_URL}/logout`, {
-            method: 'GET',
-            credentials: 'include'
+            method: 'POST',
+            credentials: 'same-origin'
         });
 
         const res=await response.json();
