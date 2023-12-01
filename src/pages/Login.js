@@ -32,7 +32,7 @@ function Login() {
     if(response.ok){
       alert(res.success);
       res.user.role=id;  //otherwise we need to reload the page to get role info
-      setUserInfo(res.user);
+      // setUserInfo(res.user);
       setRedirect(true);
     }
     else{
