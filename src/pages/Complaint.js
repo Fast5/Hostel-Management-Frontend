@@ -6,7 +6,6 @@ import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
 
 //for hostel staff
-
 function Complaint(){
     const {id}=useParams();
 
@@ -48,7 +47,7 @@ function Complaint(){
     const handleSubmit=async(event)=>{
         event.preventDefault();
 
-        const response=await fetch("http://localhost:5000/editComplaint",{
+        const response=await fetch("proxy/editComplaint",{
             method: 'PUT',
             credentials: 'include',
             headers: {

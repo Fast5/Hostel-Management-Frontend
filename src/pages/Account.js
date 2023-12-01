@@ -28,7 +28,7 @@ function Account(){
     }
 
     const handleClick=async()=>{
-        const response=await fetch("http://localhost:5000/logout", {
+        const response=await fetch("proxy/logout", {
             method: 'GET',
             credentials: 'include'
         });

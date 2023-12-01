@@ -10,7 +10,7 @@ const UserState=(props)=>{
             return;
         }
         else{
-            fetch("http://localhost:5000/profile", {
+            fetch("proxy/profile", {
                 method: 'GET',
                 credentials: "include"
             })

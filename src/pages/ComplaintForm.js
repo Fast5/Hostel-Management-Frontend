@@ -45,7 +45,6 @@ function ComplaintForm(){
         return <Loader />
     }
 
-    
     function getCurrentDateTimeIndia() {
         const now = new Date();
         const year = now.getFullYear();
@@ -71,7 +70,7 @@ function ComplaintForm(){
 
             // console.log(complaint);
 
-            const response=await fetch("http://localhost:5000/api/student/registerComplaint", {
+            const response=await fetch("proxy/api/student/registerComplaint", {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -94,7 +93,7 @@ function ComplaintForm(){
         }
         else{ //for viewing and changing status using complaint id
             // console.log(complaint);
-            const response=await fetch("http://localhost:5000/editComplaint",{
+            const response=await fetch("proxy/editComplaint",{
                 method: 'PUT',
                 credentials: 'include',
                 headers: {

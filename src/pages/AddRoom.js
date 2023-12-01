@@ -30,7 +30,7 @@ function AddRoom(){
 
         const roomId=rooms[roomIndex]?._id;
 
-        const response=await fetch("http://localhost:5000/api/admin/deleteRoom", {
+        const response=await fetch("proxy/api/admin/deleteRoom", {
             method: 'DELETE',
             credentials: 'include',
             headers: {
