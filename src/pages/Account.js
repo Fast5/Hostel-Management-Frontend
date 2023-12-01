@@ -35,10 +35,12 @@ function Account(){
 
         const res=await response.json();
 
+        console.log(res);
+
         if(res.ok){
             alert(res.success);
-            setUserInfo(null);
             setRedirect(true);
+            setUserInfo(null);
         }
         else{
             alert(res.error);
