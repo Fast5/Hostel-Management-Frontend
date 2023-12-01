@@ -28,7 +28,7 @@ function AllocateRoom(){
         return <Loader />
     }
     
-    const reqRooms=rooms.filter((room)=>{return room?.hostel===userInfo?.hostel;});
+    const reqRooms=rooms?.filter((room)=>{return room?.hostel===userInfo?.hostel;});
 
     return(
         <div>
