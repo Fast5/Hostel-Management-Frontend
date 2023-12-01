@@ -6,7 +6,7 @@ import PageNotFound from '../components/PageNotFound';
 function Login() {
   const {id}=useParams();
 
-  const {setUserInfo}=useContext(UserContext);
+  // const {setUserInfo}=useContext(UserContext);
   const [user, setUser]=useState({username: "", password: ""});
 
   const [redirect, setRedirect]=useState(false);

@@ -35,9 +35,14 @@ function Account(){
 
         const res=await response.json();
 
-        alert(res.success);
-        setUserInfo(null);
-        setRedirect(true);
+        if(res.ok){
+            alert(res.success);
+            setUserInfo(null);
+            setRedirect(true);
+        }
+        else{
+            alert(res.error);
+        }
     }
 
     if(redirect){
