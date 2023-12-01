@@ -30,12 +30,13 @@ function Account(){
     const handleClick=async()=>{
         const response=await fetch(`${process.env.REACT_APP_URL}/logout`, {
             method: 'POST',
-            credentials: 'include'
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            }
         });
 
         const res=await response.json();
-
-        console.log(res);
 
         if(res.ok){
             alert(res.success);
