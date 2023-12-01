@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
+import PageNotFound from "../components/PageNotFound";
 
 function Register(){
     const {id}=useParams();
@@ -16,7 +17,7 @@ function Register(){
         event.preventDefault();
         
         if(id==='admin'){
-            const response=await fetch("http://localhost:5000/api/admin/register", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/register`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -34,10 +35,9 @@ function Register(){
                 alert(res.error);
             }
         }
-
-        // if(id==='student'){
-
-        // }
+        else{
+            return <PageNotFound />
+        }
     }
 
     if(redirect){

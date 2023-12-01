@@ -5,7 +5,7 @@ function Hostels(){
     
     return(
         <div className="flex flex-col items-center">
-            <HostelNav />
+            {/* <HostelNav /> */}
 
             <div id="carouselExampleAutoplaying" className="carousel slide w-3/4 mt-4" data-bs-ride="carousel">
                 <div className="carousel-inner">

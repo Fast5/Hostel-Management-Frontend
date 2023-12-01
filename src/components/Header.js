@@ -12,9 +12,9 @@ function Header() {
         }
     }, [userInfo])
 
-    // if(!userInfo && !ready1){
-    //     return <Loader/>
-    // }
+    if(!userInfo && !ready1){
+        setTimeout(()=>{}, 2000);
+    }
 
     return (
         <header>

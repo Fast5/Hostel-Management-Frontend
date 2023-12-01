@@ -10,7 +10,7 @@ const UserState=(props)=>{
             return;
         }
         else{
-            fetch("proxy/profile", {
+            fetch(`${process.env.REACT_APP_URL}/profile`, {
                 method: 'GET',
                 credentials: "include"
             })

@@ -61,7 +61,7 @@ function RoomForm(){
         
         //add a room
         if(id==='new'){ 
-            const response=await fetch("http://localhost:5000/api/admin/addRoom", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/addRoom`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -82,7 +82,7 @@ function RoomForm(){
             }
         }
         else{  //edit a room with id===room._id
-            const response=await fetch("http://localhost:5000/api/admin/editRoom", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/editRoom`, {
                 method: 'PUT',
                 credentials: 'include',
                 headers: {

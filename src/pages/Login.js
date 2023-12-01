@@ -18,7 +18,7 @@ function Login() {
   const handleSubmit=async(event)=>{
     event.preventDefault();
     
-    const response=await fetch(`http://localhost:5000/api/${id}/login`, {  //for different login users
+    const response=await fetch(`${process.env.REACT_APP_URL}/api/${id}/login`, {  //for different login users
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -72,7 +72,7 @@ function Login() {
           </form>
           <div className="text-center py-2">
             Don't have an account yet?   
-            {id==='admin'?<span> <Link to={"/register/admin"} className='underline text-blue-600'>Register</Link></span>:<span> <Link to={"/contact"} className='underline text-blue-600'>Contact Administration</Link></span>}
+            <span> <Link to={"/contact"} className='underline text-blue-600'>Contact Administration</Link></span>
           </div>
       </div>
     </div>

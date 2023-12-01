@@ -42,7 +42,7 @@ function HostelStaffForm() {
         event.preventDefault();
 
         if(id==='new'){
-            const response=await fetch("http://localhost:5000/api/admin/addHostelStaff", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/addHostelStaff`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -63,7 +63,7 @@ function HostelStaffForm() {
             }
         }
         else{ //for edit
-            const response=await fetch("http://localhost:5000/api/admin/editHostelStaff", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/editHostelStaff`, {
                 method: 'PUT',
                 credentials: 'include',
                 headers: {
@@ -87,7 +87,7 @@ function HostelStaffForm() {
 
     //for deleting
     const handleClick = async() => {
-        const response=await fetch("http://localhost:5000/api/admin/deleteHostelStaff", {
+        const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/deleteHostelStaff`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {

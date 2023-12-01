@@ -14,7 +14,7 @@ const RoomsState = (props) => {
             return;
         }
         else{
-            fetch("http://localhost:5000/allRooms", {
+            fetch(`${process.env.REACT_APP_URL}/allRooms`, {
                 method: "GET",
                 // headers: {
                 //     Authorization: `Bearer ${token}`,

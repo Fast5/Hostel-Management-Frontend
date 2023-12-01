@@ -42,7 +42,7 @@ function StudentForm(){
         event.preventDefault();
 
         if(id==='new'){
-            const response=await fetch("http://localhost:5000/api/admin/addStudent", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/addStudent`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -63,7 +63,7 @@ function StudentForm(){
             }
         }
         else{  //for edit
-            const response=await fetch("http://localhost:5000/api/admin/editStudent", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/editStudent`, {
                 method: 'PUT',
                 credentials: 'include',
                 headers: {
@@ -87,7 +87,7 @@ function StudentForm(){
     
     //for deleting 
     const handleClick=async()=>{
-        const response=await fetch("http://localhost:5000/api/admin/deleteStudent", {
+        const response=await fetch(`${process.env.REACT_APP_URL}/api/admin/deleteStudent`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {

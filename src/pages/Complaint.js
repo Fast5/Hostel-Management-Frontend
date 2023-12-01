@@ -6,6 +6,7 @@ import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
 
 //for hostel staff
+
 function Complaint(){
     const {id}=useParams();
 
@@ -47,7 +48,7 @@ function Complaint(){
     const handleSubmit=async(event)=>{
         event.preventDefault();
 
-        const response=await fetch("proxy/editComplaint",{
+        const response=await fetch(`${process.env.REACT_APP_URL}/editComplaint`,{
             method: 'PUT',
             credentials: 'include',
             headers: {

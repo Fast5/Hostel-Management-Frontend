@@ -70,7 +70,7 @@ function ComplaintForm(){
 
             // console.log(complaint);
 
-            const response=await fetch("proxy/api/student/registerComplaint", {
+            const response=await fetch(`${process.env.REACT_APP_URL}/api/student/registerComplaint`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -93,7 +93,7 @@ function ComplaintForm(){
         }
         else{ //for viewing and changing status using complaint id
             // console.log(complaint);
-            const response=await fetch("proxy/editComplaint",{
+            const response=await fetch(`${process.env.REACT_APP_URL}/editComplaint`,{
                 method: 'PUT',
                 credentials: 'include',
                 headers: {

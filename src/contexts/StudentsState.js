@@ -11,7 +11,7 @@ const StudentsState=(props)=>{
             return;
         }
         else{
-            fetch("http://localhost:5000/allStudents", {
+            fetch(`${process.env.REACT_APP_URL}/allStudents`, {
                 method: 'GET',
                 credentials: 'include'  
             })

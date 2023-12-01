@@ -11,7 +11,7 @@ const ComplaintState=(props)=>{
             return;
         }
         else{
-            fetch("http://localhost:5000/allComplaints", {
+            fetch(`${process.env.REACT_APP_URL}/allComplaints`, {
                 method: 'GET',
                 credentials: "include"
             })

@@ -11,7 +11,7 @@ const HostelStaffsState=(props)=>{
             return;
         }
         else{
-            fetch("http://localhost:5000/api/admin/allHostelStaffs", {
+            fetch(`${process.env.REACT_APP_URL}/api/admin/allHostelStaffs`, {
                 method: 'GET',
                 credentials: 'include'  
             })

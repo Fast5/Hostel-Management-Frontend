@@ -69,7 +69,7 @@ function AllocateRoomForm(){
 
         roomInfo.id=id;
 
-        const response=await fetch("proxy/api/hostelStaff/allocateRoom", {
+        const response=await fetch(`${process.env.REACT_APP_URL}/api/hostelStaff/allocateRoom`, {
             method: 'PUT',
             credentials: 'include',
             headers: {
@@ -92,7 +92,7 @@ function AllocateRoomForm(){
     }
 
     const handleClick=async()=>{
-        const response=await fetch("proxy/api/hostelStaff/deallocateRoom", {
+        const response=await fetch(`${process.env.REACT_APP_URL}/api/hostelStaff/deallocateRoom`, {
             method: 'PUT',
             credentials: 'include',
             headers: {
