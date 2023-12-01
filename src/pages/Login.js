@@ -6,7 +6,7 @@ import PageNotFound from '../components/PageNotFound';
 function Login() {
   const {id}=useParams();
 
-  // const {setUserInfo}=useContext(UserContext);
+  const {setUserInfo}=useContext(UserContext);
   const [user, setUser]=useState({username: "", password: ""});
 
   const [redirect, setRedirect]=useState(false);
@@ -32,7 +32,7 @@ function Login() {
     if(response.ok){
       alert(res.success);
       res.user.role=id;  //otherwise we need to reload the page to get role info
-      // setUserInfo(res.user);
+      setUserInfo(res.user);
       setRedirect(true);
     }
     else{
