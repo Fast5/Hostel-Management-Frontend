@@ -4,6 +4,7 @@ import StudentsContext from "../contexts/StudentsContext";
 import RoomsContext from "../contexts/RoomsContext";
 import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
 
 //for hostel staff
 
@@ -60,12 +61,30 @@ function Complaint(){
         const res=await response.json();
 
         if(response.ok){
-            alert(res.success);
+            toast.success(res.success, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             setComplaints(res.complaints);
             setRedirect(true);
         }
         else{
-            alert(res.error);
+            toast.error(res.error, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     }
 

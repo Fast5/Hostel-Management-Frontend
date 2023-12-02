@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import RoomsContext from "../contexts/RoomsContext";
 import StudentsContext from "../contexts/StudentsContext";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
 
 function AllocateRoomForm(){
     const {id}=useParams();
@@ -81,13 +82,31 @@ function AllocateRoomForm(){
         const res=await response.json();
         
         if(response.ok){
-            alert(res.success);
+            toast.success(res.success, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             setRooms(res.rooms);
             setStudents(res.students);
             setRedirect(true);
         }
         else{
-            alert(res.error);
+            toast.error(res.error, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     }
 
@@ -104,13 +123,31 @@ function AllocateRoomForm(){
         const res=await response.json();
 
         if(response.ok){
-            alert(res.success);
+            toast.success(res.success, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             setRooms(res.rooms);
             setStudents(res.students);
             setRedirect(true);
         }
         else{
-            alert(res.error);
+            toast.success(res.error, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     }
 

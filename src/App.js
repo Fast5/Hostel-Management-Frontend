@@ -27,6 +27,8 @@ import AllocateRoomForm from './pages/AllocateRoomForm';
 import ComplaintForm from './pages/ComplaintForm';
 import ComplaintState from './contexts/ComplaintState';
 import Complaint from './pages/Complaint';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -69,6 +71,7 @@ function App() {
           </UserState>
         </BrowserRouter>
       </div>
+      <ToastContainer />
     </>
   );
 }

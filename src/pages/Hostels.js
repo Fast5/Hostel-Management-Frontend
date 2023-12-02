@@ -4,10 +4,8 @@ import HostelNav from "../components/HostelNav";
 function Hostels(){
     
     return(
-        <div className="flex flex-col items-center">
-            {/* <HostelNav /> */}
-
-            <div id="carouselExampleAutoplaying" className="carousel slide w-3/4 mt-4" data-bs-ride="carousel">
+        <div className="flex flex-col items-center justify-start">
+            <div id="carouselExampleAutoplaying" className="carousel slide w-3/4 mt-14 mb-32" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src="../assets/BH-1.png" className="d-block w-100 h-[30rem] rounded-xl" alt="bh1" />

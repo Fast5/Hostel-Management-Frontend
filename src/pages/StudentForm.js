@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import StudentsContext from "../contexts/StudentsContext";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
 // import PageNotFound from "../components/PageNotFound";
 
 function StudentForm(){
@@ -54,12 +55,30 @@ function StudentForm(){
             const res=await response.json();
                 
             if(response.ok){
-                alert(res.success);
+                toast.success(res.success, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
                 setStudents(res.students);
                 setRedirect(true);
             }
             else{
-                alert(res.error);
+                toast.error(res.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
             }
         }
         else{  //for edit
@@ -75,12 +94,30 @@ function StudentForm(){
             const res=await response.json();
                 
             if(response.ok){
-                alert(res.success);
+                toast.success(res.success, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
                 setStudents(res.students);
                 setRedirect(true);
             }
             else{
-                alert(res.error);
+                toast.error(res.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
             }
         }
     }
@@ -99,12 +136,30 @@ function StudentForm(){
         const res=await response.json();
             
         if(response.ok){
-            alert(res.success);
+            toast.success(res.success, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             setStudents(res.students);
             setRedirect(true);
         }
         else{
-            alert(res.error);
+            toast.error(res.error, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     }
 

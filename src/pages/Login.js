@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 import PageNotFound from '../components/PageNotFound';
+import { toast } from 'react-toastify';
 
 function Login() {
   const {id}=useParams();
@@ -30,13 +31,31 @@ function Login() {
     const res=await response.json();
       
     if(response.ok){
-      alert(res.success);
+      toast.success(res.success, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       res.user.role=id;  //otherwise we need to reload the page to get role info
       setUserInfo(res.user);
       setRedirect(true);
     }
     else{
-      alert(res.error);
+      toast.error(res.error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
 

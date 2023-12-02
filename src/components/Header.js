@@ -12,7 +12,7 @@ function Header() {
         }
     }, [userInfo])
 
-    if(!userInfo && !ready1){
+    if(!ready1){
         setTimeout(()=>{}, 2000);
     }
 

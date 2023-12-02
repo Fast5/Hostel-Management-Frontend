@@ -5,6 +5,7 @@ import RoomsContext from "../contexts/RoomsContext";
 import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
 import StudentsContext from "../contexts/StudentsContext";
+import { toast } from "react-toastify";
 
 //for student
 function ComplaintForm(){
@@ -66,9 +67,7 @@ function ComplaintForm(){
         event.preventDefault();
 
         if(id==='new'){  //studentId added in Backend
-            complaint.roomId=rooms.filter((room)=>{return room._id===userInfo?.roomId})[0]._id;
-
-            // console.log(complaint);
+            complaint.roomId=rooms.filter((room)=>{return room?._id===userInfo?.roomId})[0]._id;
 
             const response=await fetch(`${process.env.REACT_APP_URL}/api/student/registerComplaint`, {
                 method: 'POST',
@@ -82,13 +81,31 @@ function ComplaintForm(){
             const res=await response.json();
 
             if(response.ok){
-                alert(res.success);
+                toast.success(res.success, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
                 setUserInfo(res.userInfo);
                 setComplaints(res.complaints);
                 setRedirect(true);
             }
             else{
-                alert(res.error);
+                toast.error(res.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
             }
         }
         else{ //for viewing and changing status using complaint id
@@ -105,12 +122,30 @@ function ComplaintForm(){
             const res=await response.json();
 
             if(response.ok){
-                alert(res.success);
+                toast.success(res.success, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
                 setComplaints(res.complaints);
                 setRedirect(true);
             }
             else{
-                alert(res.error);
+                toast.error(res.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
             }
         }
     }

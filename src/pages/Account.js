@@ -5,6 +5,7 @@ import AccountNav from "../components/AccountNav";
 import Loader from "../components/Loader";
 import PageNotFound from "../components/PageNotFound";
 import RoomsContext from "../contexts/RoomsContext";
+import {toast} from "react-toastify";
 
 function Account(){
     const {id}=useParams();
@@ -39,11 +40,31 @@ function Account(){
         const res=await response.json();
 
         if(response.ok){
-            alert(res.success);
+            // alert(res.success);
+            toast.success(res.success, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             setRedirect(true);
             setUserInfo(null);
         }
         else{
+            toast.error(res.error, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             alert(res.error);
         }
     }

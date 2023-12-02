@@ -3,6 +3,7 @@ import AccountNav from "../components/AccountNav";
 import { Link } from "react-router-dom";
 import RoomsContext from "../contexts/RoomsContext";
 import Loader from "../components/Loader";
+import { toast } from "react-toastify";
 
 function AddRoom(){
     //make sure to check if the user is admin or not using userContext->role==='admin'=>then only allow (left)
@@ -42,11 +43,29 @@ function AddRoom(){
         const res=await response.json();
             
         if(response.ok){
-            alert(res.success);
+            toast.success(res.success, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
             setRooms(res.rooms);
         }
         else{
-            alert(res.error);
+            toast.error(res.error, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     }
     

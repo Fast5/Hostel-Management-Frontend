@@ -8,7 +8,7 @@ import ComplaintContext from "../contexts/ComplaintContext";
 function AddComplaint(){
 
     const {userInfo, ready1, setReady1}=useContext(UserContext);
-    const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
+    const {complaints, ready5, setReady5}=useContext(ComplaintContext);
 
     useEffect(()=>{
         if(!userInfo){
