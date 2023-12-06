@@ -12,8 +12,8 @@ function Header() {
         }
     }, [userInfo])
 
-    if(!ready1){
-        setTimeout(()=>{}, 2000);
+    if(!userInfo && !ready1){
+        return <Loader />
     }
 
     return (
