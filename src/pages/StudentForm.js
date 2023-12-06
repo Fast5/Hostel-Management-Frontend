@@ -210,7 +210,7 @@ function StudentForm(){
                     </div>
                     <div className="w-2/4">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" name="password" value={studentInfo?.password} onChange={handleChange} required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Eight or more characters" />
+                        <input type="password" id="password" name="password" value={studentInfo?.password} onChange={handleChange} required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="must contain 8 or more characters consisting of atleast one cap, one small and one number." />
                     </div>
                 </div>
 
