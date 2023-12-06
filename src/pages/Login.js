@@ -92,7 +92,7 @@ function Login() {
           <div className="text-center py-2">
             Don't have an account yet?   
             <span> <Link to={"/contact"} className='underline text-blue-600'>Contact Administration</Link></span>
-          </div>
+          </div> 
       </div>
     </div>
   )

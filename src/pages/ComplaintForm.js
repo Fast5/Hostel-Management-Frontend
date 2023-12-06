@@ -46,7 +46,7 @@ function ComplaintForm(){
         return <Loader />
     }
 
-    if(userInfo?.role!=='student'){
+    if(userInfo?.role!=='student' && !redirect){
         return <PageNotFound/> 
     }
 

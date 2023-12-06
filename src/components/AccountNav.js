@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import PageNotFound from "./PageNotFound";
 
 function AccountNav(props){
     const location=useLocation();
@@ -25,9 +26,6 @@ function AccountNav(props){
                     <Link to={`/${props.role}/addRoom`} className={handleClasses("addRoom")}>
                         Add Room
                     </Link>
-                    {/* <a href={`/${props.role}/addRoom`}>
-                        Add ERoom
-                    </a> */}
                     <div className="border-l border-gray-300"></div>
                     <Link to={`/${props.role}/addStudent`} className={handleClasses("addStudent")}>
                         Add Student
@@ -79,9 +77,8 @@ function AccountNav(props){
         );
     }
     else{
-            //page not found
+        return <PageNotFound />
     }
-
 }
 
 export default AccountNav;
