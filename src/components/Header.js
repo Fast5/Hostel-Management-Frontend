@@ -4,13 +4,13 @@ import UserContext from "../contexts/UserContext";
 import Loader from "./Loader";
 
 function Header() {
-    const {userInfo, ready1, setReady1} = useContext(UserContext);
+    const {userInfo, ready1} = useContext(UserContext);
 
-    useEffect(()=>{
-        if(!userInfo){
-            setReady1(false);
-        }
-    }, [userInfo])
+    // useEffect(()=>{
+    //     if(!userInfo){
+    //         setReady1(false);
+    //     }
+    // }, [userInfo])
 
     if(!ready1){
         setTimeout(()=>{}, 2000);
