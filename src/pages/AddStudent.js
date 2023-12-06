@@ -3,9 +3,12 @@ import AccountNav from "../components/AccountNav";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import StudentsContext from "../contexts/StudentsContext";
+import UserContext from "../contexts/UserContext";
+import PageNotFound from "../components/PageNotFound";
 
 function AddStudent(){
 
+    const {userInfo}=useContext(UserContext);
     const {students, ready3, setReady3}=useContext(StudentsContext);
 
     useEffect(()=>{
@@ -17,6 +20,10 @@ function AddStudent(){
 
     if(students.length===0 && !ready3){
         return <Loader/>
+    }
+
+    if(userInfo?.role!=='admin'){
+        return <PageNotFound/>
     }
 
     return(

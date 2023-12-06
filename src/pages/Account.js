@@ -19,14 +19,20 @@ function Account(){
         if(!userInfo){
             setReady1(false);
         }
-        if(rooms.length===0){
+        if(id==='student' && rooms.length===0){
             setReady2(false);
         }
     }, [userInfo, rooms.length])
 
+  
     if(!userInfo && !redirect){
         return <Loader />
     }
+
+    // if(userInfo?.role!==id){  //if some unauthorized person opens account page of another role (Ex: student opens account page of admin)
+    //     // console.log(userInfo.role);
+    //     return <PageNotFound />
+    // }
 
     const handleClick=async()=>{
         const response=await fetch(`${process.env.REACT_APP_URL}/logout`, {

@@ -31,6 +31,10 @@ function Complaints(){
         return <Loader />
     }
 
+    if(userInfo?.role!=='hostelStaff'){
+        return <Loader />
+    }
+
     function convertToTitleCase(text) {
         // Split the text into words
         let words = text.split(/(?=[A-Z])|_/);

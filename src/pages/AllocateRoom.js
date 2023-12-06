@@ -5,6 +5,7 @@ import UserContext from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import StudentsContext from "../contexts/StudentsContext";
 import Loader from "../components/Loader";
+import PageNotFound from "../components/PageNotFound";
 
 function AllocateRoom(){
     const {userInfo, ready1, setReady1}=useContext(UserContext);
@@ -26,6 +27,10 @@ function AllocateRoom(){
 
     if((!userInfo && !ready1) || (rooms.length===0 && !ready2) || (students.length===0 && !ready3)){
         return <Loader />
+    }
+
+    if(userInfo?.role!=='hostelStaff'){
+        return <PageNotFound />
     }
     
     const reqRooms=rooms?.filter((room)=>{return room?.hostel===userInfo?.hostel;});

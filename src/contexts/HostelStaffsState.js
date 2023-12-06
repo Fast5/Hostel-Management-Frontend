@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import HostelStaffsContext from "./HostelStaffsContext";
+import { useNavigate } from "react-router-dom";
 
 const HostelStaffsState=(props)=>{
+
+    const navigate=useNavigate();
 
     const [hostelStaffs, setHostelStaffs]=useState([]);
     const [ready4, setReady4]=useState(true);
@@ -20,6 +23,9 @@ const HostelStaffsState=(props)=>{
             })
             .then((data)=>{
                 setReady4(true);
+                if(data.error){
+                    navigate("/PageNotFound");
+                }
                 setHostelStaffs(data)
                 return;
             });

@@ -5,7 +5,6 @@ import HostelStaffsContext from "../contexts/HostelStaffsContext";
 import Loader from "../components/Loader";
 
 function AddHostelStaff(){
-
     const {hostelStaffs, ready4, setReady4}=useContext(HostelStaffsContext);
 
     useEffect(()=>{
@@ -13,7 +12,6 @@ function AddHostelStaff(){
             setReady4(false);
         }
     }, [hostelStaffs.length])
-
 
     if(hostelStaffs.length===0 && !ready4){
         return <Loader/>

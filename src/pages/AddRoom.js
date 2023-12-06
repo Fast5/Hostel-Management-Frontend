@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import RoomsContext from "../contexts/RoomsContext";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import UserContext from "../contexts/UserContext";
+import PageNotFound from "../components/PageNotFound";
 
 function AddRoom(){
     //make sure to check if the user is admin or not using userContext->role==='admin'=>then only allow (left)
-    
+    const {userInfo}=useContext(UserContext);
     const {rooms, setRooms, ready2, setReady2}=useContext(RoomsContext); 
 
     useEffect(()=>{
@@ -18,6 +20,10 @@ function AddRoom(){
     
     if(rooms.length===0 && !ready2){
         return <Loader />
+    }
+
+    if(userInfo?.role!=='admin'){  
+        return <PageNotFound/>
     }
 
     //delete last room

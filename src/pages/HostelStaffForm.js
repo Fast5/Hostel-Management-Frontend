@@ -3,6 +3,7 @@ import { Link, Navigate, redirect, useParams } from "react-router-dom";
 import HostelStaffsContext from "../contexts/HostelStaffsContext";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import PageNotFound from "../components/PageNotFound";
 
 function HostelStaffForm() {
     const {id} = useParams();
@@ -31,6 +32,10 @@ function HostelStaffForm() {
         return <Loader />
     }
 
+
+    if(id!=='new' && !hostelStaffInfo){  //if hostel id is changed and is not found
+        return <PageNotFound /> 
+    }
     // if(hostelStaffs.length===0 && !ready4 && id!=='new'){  //has to be checked
     //     return <Navigate to={"/admin/addHostelStaff"}/>
     // }

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ComplaintContext from "./ComplaintContext";
+import { useNavigate } from "react-router-dom";
 
 const ComplaintState=(props)=>{
+
+    const navigate=useNavigate();
 
     const [complaints, setComplaints]=useState([]);
     const [ready5, setReady5]=useState(true);
@@ -20,6 +23,9 @@ const ComplaintState=(props)=>{
             })
             .then((data)=>{
                 setReady5(true);
+                if(data.error){
+                    navigate("/PageNotFound");
+                }
                 setComplaints(data);
                 return; 
             });

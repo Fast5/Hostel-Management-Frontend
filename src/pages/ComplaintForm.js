@@ -6,6 +6,7 @@ import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
 import StudentsContext from "../contexts/StudentsContext";
 import { toast } from "react-toastify";
+import PageNotFound from "../components/PageNotFound";
 
 //for student
 function ComplaintForm(){
@@ -18,7 +19,6 @@ function ComplaintForm(){
     const {userInfo, setUserInfo, ready1, setReady1}=useContext(UserContext);
     const {rooms, ready2, setReady2}=useContext(RoomsContext);
     const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
-    const {setStudents}=useContext(StudentsContext);
 
     useEffect(()=>{
         if(!userInfo){
@@ -42,8 +42,16 @@ function ComplaintForm(){
         }
     }, [userInfo, rooms.length, complaints.length, id])
 
-    if((!userInfo && !ready1) || (rooms.length===0 && !ready2) || (complaint.length===0 && !ready5)){
+    if((!userInfo && !ready1) || (rooms.length===0 && !ready2) || (complaints.length===0 && !ready5)){
         return <Loader />
+    }
+
+    if(userInfo?.role!=='student'){
+        return <PageNotFound/> 
+    }
+
+    if(id!=='new' && !complaint){  //if complaint id doesn't match 
+        return <PageNotFound />
     }
 
     function getCurrentDateTimeIndia() {

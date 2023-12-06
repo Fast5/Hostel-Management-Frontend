@@ -3,6 +3,8 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import StudentsContext from "../contexts/StudentsContext";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import PageNotFound from "../components/PageNotFound";
+import UserContext from "../contexts/UserContext";
 // import PageNotFound from "../components/PageNotFound";
 
 function StudentForm(){
@@ -12,6 +14,8 @@ function StudentForm(){
 
     const [redirect, setRedirect]=useState(false);
 
+
+    const {userInfo}=useContext(UserContext);
     const {students, setStudents, ready3, setReady3}=useContext(StudentsContext);
 
     useEffect(()=>{
@@ -31,9 +35,14 @@ function StudentForm(){
     if(students.length===0 && !ready3){
         return <Loader />
     }
-    // if(students.length===0 && !ready3 && id!=='new'){  //has to be checked
-    //     return <Navigate to={"/admin/addStudent"}/>
-    // }
+
+    if(userInfo?.role!=='admin'){
+        return <PageNotFound/>
+    }
+
+    if(id!=='new' && !studentInfo){  //if student id is changed and is not found
+        return <PageNotFound />
+    }
 
     const handleChange=(event)=>{
         setStudentInfo({...studentInfo, [event.target.name]: event.target.value});

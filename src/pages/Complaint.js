@@ -5,12 +5,15 @@ import RoomsContext from "../contexts/RoomsContext";
 import ComplaintContext from "../contexts/ComplaintContext";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import PageNotFound from "../components/PageNotFound";
+import UserContext from "../contexts/UserContext";
 
 //for hostel staff
 
 function Complaint(){
     const {id}=useParams();
 
+    const {userInfo}=useContext(UserContext);
     const {rooms, ready2, setReady2}=useContext(RoomsContext);
     const {students, ready3, setReady3}=useContext(StudentsContext);
     const {complaints, setComplaints, ready5, setReady5}=useContext(ComplaintContext);
@@ -31,7 +34,7 @@ function Complaint(){
             setReady5(false); 
         }
         else{
-            setStatus(complaints.filter((complaint)=>{return complaint._id===id})[0].status);
+            setStatus(complaints.filter((complaint)=>{return complaint._id===id})[0]?.status);
         }
     }, [students.length, rooms.length, complaints.length]);
 
@@ -39,6 +42,15 @@ function Complaint(){
     if((rooms.length===0 && !ready2) || (students.length===0 && !ready3) || (complaints.length===0 && !ready5)){
         return <Loader />
     }
+
+    if(userInfo?.role!=='hostelStaff'){
+        return <PageNotFound />
+    }
+
+    if(!status){
+        return <PageNotFound />
+    }
+
 
     const reqComplaint=complaints.filter((complaint)=>{return complaint?._id===id})[0];
 

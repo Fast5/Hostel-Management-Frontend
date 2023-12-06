@@ -4,6 +4,8 @@ import RoomsContext from "../contexts/RoomsContext";
 import StudentsContext from "../contexts/StudentsContext";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import PageNotFound from "../components/PageNotFound";
+import UserContext from "../contexts/UserContext";
 
 function AllocateRoomForm(){
     const {id}=useParams();
@@ -14,6 +16,7 @@ function AllocateRoomForm(){
     
     const [redirect, setRedirect]=useState(false);
 
+    const {userInfo}=useContext(UserContext);
     const {rooms, setRooms, ready2, setReady2}=useContext(RoomsContext);
     const {students, setStudents, ready3, setReady3}=useContext(StudentsContext);
 
@@ -23,8 +26,8 @@ function AllocateRoomForm(){
         }
         else{
             setRoomInfo(rooms.filter((room)=>{return room._id===id})[0]);
-            setStudent1(rooms.filter((room)=>{return room._id===id})[0].occupants[0]);
-            setStudent2(rooms.filter((room)=>{return room._id===id})[0].occupants[1]);
+            setStudent1(rooms.filter((room)=>{return room._id===id})[0]?.occupants[0]);
+            setStudent2(rooms.filter((room)=>{return room._id===id})[0]?.occupants[1]);
         }
 
         if(students.length===0){
@@ -34,6 +37,14 @@ function AllocateRoomForm(){
 
     if((rooms.length===0 && !ready2) || (students.length===0 && !ready3)){
         return <Loader />
+    }
+
+    if(userInfo?.role!=='hostelStaff'){
+        return <PageNotFound />
+    }
+
+    if(!roomInfo){
+        return <PageNotFound />
     }
 
     const reqStudents=students.filter((student)=>{return student?.roomId===id || student?.roomId===null;});

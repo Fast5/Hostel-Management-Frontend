@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import StudentsContext from "./StudentsContext";
+import { useNavigate } from "react-router-dom";
 
 const StudentsState=(props)=>{
+
+    const navigate=useNavigate();
 
     const [students, setStudents]=useState([]);
     const [ready3, setReady3]=useState(true);
@@ -20,28 +23,14 @@ const StudentsState=(props)=>{
             })
             .then((data)=>{
                 setReady3(true);
+                if(data.error){
+                    navigate("/PageNotFound");
+                }
                 setStudents(data);
                 return;
             });
         }
     }, [ready3]);
-
-    // useEffect(()=>{
-    //     if(!students.length){
-    //         fetch("http://localhost:5000/allStudents", {
-    //             method: 'GET',
-    //             credentials: 'include'  
-    //         })
-    //         .then((response)=>{
-    //             return response.json();
-    //         })
-    //         .then((data)=>{
-    //             setReady(true);
-    //             return setStudents(data);
-    //         });
-    //     }
-    // }, []);
-
 
     return(
         <StudentsContext.Provider value={{students, setStudents, ready3, setReady3}}>

@@ -3,6 +3,8 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import RoomsContext from "../contexts/RoomsContext";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
+import PageNotFound from "../components/PageNotFound";
+import UserContext from "../contexts/UserContext";
 
 function RoomForm(){
     const {id}=useParams();  //for editing (only accomodationtype) particular room
@@ -11,6 +13,7 @@ function RoomForm(){
 
     const [redirect, setRedirect]=useState(false);
 
+    const {userInfo}=useContext(UserContext);
     const {rooms, setRooms, ready2, setReady2}=useContext(RoomsContext);   //reload required (solved by setRooms method)
     
     useEffect(()=>{        
@@ -23,8 +26,17 @@ function RoomForm(){
 
     }, [id, rooms.length]);
 
+    if(userInfo?.role!=='admin'){
+        return <PageNotFound/>
+    }
+
     if(rooms.length===0 && !ready2){
         return <Loader />
+    }
+
+
+    if(id!=='new' && !roomInfo){  //if room id is changed and is not found
+        return <PageNotFound />
     }
 
     let bh1Rooms=0, bh2Rooms=0, bh3Rooms=0;
