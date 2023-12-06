@@ -18,7 +18,7 @@ function AddRoom(){
         }
     }, [rooms.length])
     
-    if(rooms.length===0 && !ready2){
+    if((rooms.length===0 && !ready2) || !userInfo){
         return <Loader />
     }
 
