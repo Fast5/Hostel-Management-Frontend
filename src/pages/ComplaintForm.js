@@ -99,6 +99,7 @@ function ComplaintForm(){
                     progress: undefined,
                     theme: "colored",
                 });
+                console.log(res);
                 setUserInfo(res.userInfo);
                 setComplaints(res.complaints);
                 setRedirect(true);
