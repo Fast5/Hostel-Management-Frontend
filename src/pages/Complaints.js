@@ -5,6 +5,7 @@ import UserContext from "../contexts/UserContext";
 import RoomsContext from "../contexts/RoomsContext";
 import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
+import PageNotFound from "../components/PageNotFound";
 
 function Complaints(){
 
@@ -32,7 +33,7 @@ function Complaints(){
     }
 
     if(userInfo?.role!=='hostelStaff'){
-        return <Loader />
+        return <PageNotFound />
     }
 
     function convertToTitleCase(text) {
