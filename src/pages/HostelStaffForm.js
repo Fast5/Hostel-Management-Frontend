@@ -182,7 +182,7 @@ function HostelStaffForm() {
                 <input type="email" id="username" name="username" value={hostelStaffInfo?.username} onChange={handleChange} required autoComplete="off" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Valid email-id" />
 
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" value={hostelStaffInfo?.password} onChange={handleChange} required pattern=".{8,}" title="Eight or more characters" />
+                <input type="password" id="password" name="password" value={hostelStaffInfo?.password} onChange={handleChange} required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Eight or more characters" />
                 
                 <fieldset className="mt-2">
                     <legend className="text-lg">Hostel:</legend>
