@@ -99,8 +99,8 @@ function ComplaintForm(){
                     progress: undefined,
                     theme: "colored",
                 });
-                // setUserInfo(res.userInfo);
                 setComplaints(res.complaints);
+                setUserInfo(res.userInfo);
                 setRedirect(true);
             }
             else{
