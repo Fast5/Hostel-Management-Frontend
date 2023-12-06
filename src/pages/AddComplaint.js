@@ -25,8 +25,7 @@ function AddComplaint(){
         return <Loader/>
     }
 
-    let reqComplaints=complaints?.filter((complaint)=>{return userInfo?.complaints.includes(complaint?._id)});
-        
+    
     function convertToTitleCase(text) {
         // Split the text into words
         let words = text.split(/(?=[A-Z])|_/);
@@ -39,7 +38,9 @@ function AddComplaint(){
         
         return titleCaseText+" Related";
     }
-
+    
+    let reqComplaints=complaints.filter((complaint)=>{return userInfo?.complaints.includes(complaint?._id)});
+    
     return(
         <div className="text-center">
             <AccountNav role="student"/>
