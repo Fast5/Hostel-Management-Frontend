@@ -99,7 +99,10 @@ function ComplaintForm(){
                     progress: undefined,
                     theme: "colored",
                 });
-                setUserInfo(res.userInfo);
+
+                let user=res.userInfo;
+                user.role="student"; 
+                setUserInfo(user);
                 setComplaints(res.complaints);
                 setRedirect(true);
             }
