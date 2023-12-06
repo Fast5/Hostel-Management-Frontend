@@ -100,7 +100,7 @@ function ComplaintForm(){
                     theme: "colored",
                 });
                 setComplaints(res.complaints);
-                setUserInfo(res.userInfo);
+                // setUserInfo(res.userInfo);
                 setRedirect(true);
             }
             else{

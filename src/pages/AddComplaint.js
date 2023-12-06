@@ -25,7 +25,7 @@ function AddComplaint(){
         return <Loader/>
     }
 
-    const reqComplaints=complaints?.filter((complaint)=>{return userInfo?.complaints.includes(complaint?._id)});
+    let reqComplaints=complaints?.filter((complaint)=>{return userInfo?.complaints.includes(complaint?._id)});
         
     function convertToTitleCase(text) {
         // Split the text into words
