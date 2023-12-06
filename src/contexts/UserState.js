@@ -19,7 +19,9 @@ const UserState=(props)=>{
             })
             .then((data)=>{
                 setReady1(true);
-                setUserInfo(data);
+                if(!data.error){
+                    setUserInfo(data);
+                }
                 return;
             })
         }

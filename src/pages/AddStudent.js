@@ -18,7 +18,7 @@ function AddStudent(){
     }, [students.length])
 
 
-    if(students.length===0 && !ready3){
+    if((students.length===0 && !ready3) || !userInfo){
         return <Loader/>
     }
 
