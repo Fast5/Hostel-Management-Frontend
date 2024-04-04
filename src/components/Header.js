@@ -21,7 +21,7 @@ function Header() {
         <header>
             <div className="flex justify-between p-6 bg-amber-500">
                 <Link to={"/"}>
-                    <img src="/assets/LOGO_LNM.png" alt="LNMITT_logo" width={120} height={30} />
+                    <img src="/assets/logo.jpeg" alt="LNMITT_logo" width={120} height={30} />
                 </Link>
 
                 <div className="flex justify-between items-center gap-4">
