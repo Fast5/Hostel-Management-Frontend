@@ -2,7 +2,7 @@ import React from "react";
 
 function Home() {
     return (
-        <div className="grid grid-cols-2 items-center p-6">
+        <div className="grid grid-cols-2 items-center p-4">
             <div className="m-4 mt-96 text-red-500 font-bold text-5xl text-center">
                 Hostel Management
                 <br />
