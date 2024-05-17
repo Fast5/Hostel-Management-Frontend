@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
-import Loader from "./Loader";
 
 function Header() {
     const {userInfo, ready1, setReady1} = useContext(UserContext);

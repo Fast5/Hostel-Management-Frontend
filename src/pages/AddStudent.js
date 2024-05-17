@@ -27,7 +27,7 @@ function AddStudent(){
     }
 
     return(
-        <div className="text-center">
+        <div className="text-center mb-8">
             <AccountNav role="admin"/>
             
             <Link to={"/admin/addStudent/new"} className="text-white bg-red-500 py-2 px-4 rounded-full">
