@@ -25,7 +25,7 @@ function Account(){
     }, [userInfo, rooms.length])
 
 
-    if(!userInfo){
+    if(!userInfo && !redirect){
         return <Loader />
     }
 
