@@ -91,7 +91,7 @@ function AddRoom(){
                 <div className="col">
                     <h1 className="text-lg mb-2">BH-1</h1>
                     <div className="m-2">
-                        {bh1Rooms?.length>0 ?  bh1Rooms.map((room, index)=>{
+                        {bh1Rooms?.length>0 ? bh1Rooms.map((room, index)=>{
                             return(
                                 <Link key={index} to={`/admin/addRoom/${room?._id}`}>
                                     <div className="bg-gray-100 p-2 rounded-2xl mb-4">

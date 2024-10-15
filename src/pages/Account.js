@@ -66,7 +66,6 @@ function Account(){
                 progress: undefined,
                 theme: "colored",
             });
-            alert(res.error);
         }
     }
 
@@ -142,7 +141,6 @@ function Account(){
             
                     <button onClick={handleClick} className="bg-red-500 text-white max-w-sm w-full py-2 mt-4 rounded-2xl">Logout</button>
 
-                    <p>In case of any discrepancy, kindly contact: {rooms.filter((room)=>{return room._id===userInfo?.roomId})[0]?.hostel}@gmail.com .</p>
                 </div>
             </div>
         );       
@@ -168,7 +166,6 @@ function Account(){
 
                     <button onClick={handleClick} className="bg-red-500 text-white max-w-sm w-full py-2 mt-4 rounded-2xl">Logout</button>
 
-                    <p>In case of any discrepancies,kindly contact rohan admin@gmail.com .</p>
                 </div>
             </div>   
         );
